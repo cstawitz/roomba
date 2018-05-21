@@ -9,10 +9,9 @@ dfs_idx <- function(.x, .f) {
     for (i in seq_along(x)) {
       if (isTRUE(tryCatch(.f(x[[i]]), error = function(e) FALSE))) {
         res[[num <<- num + 1L]] <<- append(idx, i)
-      } else {
-        if (is.list(x[[i]])) {
-          walk(x[[i]], append(idx, i))
-        }
+      }
+      if (is.list(x[[i]])) {
+        walk(x[[i]], append(idx, i))
       }
     }
   }
