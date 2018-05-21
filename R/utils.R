@@ -8,7 +8,5 @@ replace_null <- function(e, replacement = NA_character_) {
   }
 }
 
-
-
 #' vec <- list(c("a", "b"), x = NULL)
 #' purrr::map(vec, replace_null, replacement = "foo")
