@@ -37,6 +37,17 @@ devtools::install_github("ropenscilabs/roomba")
 ```
 ## Example
 
+```{r, echo=FALSE}
+replace_null <- function(x, replacement = NA_character_) {
+  empty_idx <- dfs_idx(x, ~ length(.x) == 0)
+  for (i in empty_idx) {
+    x[[i]] <- replacement
+  }
+  x
+}
+```
+
+
 ```{r example}
 library(roomba)
 
