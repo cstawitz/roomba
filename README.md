@@ -1,5 +1,4 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 roomba
 ======
 
@@ -22,16 +21,6 @@ Example
 
 ``` r
 library(roomba)
-#> Loading required package: assertthat
-
-replace_null <- function(x, replacement = NA_character_) {
-  empty_idx <- dfs_idx(x, ~ length(.x) == 0)
-  for (i in empty_idx) {
-    x[[i]] <- replacement
-  }
-  x
-}
-
 
 toy_data <- jsonlite::fromJSON('
   {
@@ -68,6 +57,53 @@ toy_data <- jsonlite::fromJSON('
 
 # Replace the NULLs at every level with the default replacement, NA
 y <- toy_data %>% replace_null() 
+y
+#> $stuff
+#> $stuff$buried
+#> $stuff$buried$deep
+#> $stuff$buried$deep[[1]]
+#> $stuff$buried$deep[[1]]$goodstuff
+#> [1] "here"
+#> 
+#> $stuff$buried$deep[[1]]$name
+#> [1] "Bob Rudis"
+#> 
+#> $stuff$buried$deep[[1]]$secret_power
+#> [1] 5
+#> 
+#> $stuff$buried$deep[[1]]$other_secret_power
+#> [1] NA
+#> 
+#> 
+#> $stuff$buried$deep[[2]]
+#> $stuff$buried$deep[[2]]$goodstuff
+#> [1] "here"
+#> 
+#> $stuff$buried$deep[[2]]$name
+#> [1] "Amanda Dobbyn"
+#> 
+#> $stuff$buried$deep[[2]]$secret_power
+#> [1] 4
+#> 
+#> $stuff$buried$deep[[2]]$more_nested_stuff
+#> [1] 4
+#> 
+#> 
+#> 
+#> $stuff$buried$alsodeep
+#> [1] 2342423234
+#> 
+#> $stuff$buried$deeper
+#> $stuff$buried$deeper$foo
+#> $stuff$buried$deeper$foo[[1]]
+#> $stuff$buried$deeper$foo[[1]]$goodstuff
+#> [1] 5
+#> 
+#> $stuff$buried$deeper$foo[[1]]$name
+#> [1] "barb"
+#> 
+#> $stuff$buried$deeper$foo[[1]]$secret_power
+#> [1] NA
 
 y %>% dfs_idx(~ .x$goodstuff == "here") %>%
   purrr:::map_dfr(~ y[[.x]])
