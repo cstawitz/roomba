@@ -17,7 +17,7 @@
 #'
 
 
-roomba <- function(inp, replacement = NA_character_,
+roomba <- function(inp, clean = TRUE, replacement = NA_character_,
                    rows = NULL, cols = NULL) {
   assertthat::assert_that(length(inp),
                           "Input is of length 0.")

@@ -1,3 +1,4 @@
+context("roomba utility function tests")
 
 # Test that replace_null() works as expected
 lst <- list(c("a", "b"), x = NULL)
