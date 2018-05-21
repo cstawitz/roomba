@@ -7,11 +7,16 @@ Maintainer: The package maintainer <yourself@somewhere.net>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: MIT + file LICENSE
-Depends: 
+Encoding: UTF-8
+Depends:
     R (>= 3.0)
+LazyData: true
+RoxygenNote: 6.0.1
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr
 Imports: 
     assertthat,
-    magrittr,
+    magrittr
     purrr
 Suggests: 
     knitr,
@@ -19,4 +24,4 @@ Suggests:
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1.9000
+
