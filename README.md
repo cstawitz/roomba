@@ -3,5 +3,5 @@ This is a package to transform large, multi-nested lists into a more user-friend
 
 Key features of the package:
 * `roomba(rows = , cols = )` searches deeply-nested list for names specified in `rows` or `cols` arguments (string vectors) and returns a `tibble` with the associated row or column titles. Nothing further about nesting hierarchy or depth need be specified.
-* handling empty values gracefully - substituting with `NA` or user-specified value or truncating lists appropriately.
+* handles empty values gracefully via `replace_nulls()` function that substitutes `NULL` values with `NA` or user-specified value, or truncates lists appropriately.
 
