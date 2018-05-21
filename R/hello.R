@@ -1,18 +1,18 @@
-# Hello, world!
-#
-# This is an example function named 'hello' 
-# which prints 'Hello, world!'.
-#
-# You can learn more about package authoring with RStudio at:
-#
-#   http://r-pkgs.had.co.nz/
-#
-# Some useful keyboard shortcuts for package authoring:
-#
-#   Build and Reload Package:  'Cmd + Shift + B'
-#   Check Package:             'Cmd + Shift + E'
-#   Test Package:              'Cmd + Shift + T'
-
-hello <- function() {
-  print("Hello, world!")
+#' @export
+dfs_idx <- function(x, f) {
+  res <- list()
+  num <- 0L
+  walk <- function(x, idx) {
+    for (i in seq_along(x)) {
+      if (isTRUE(tryCatch(f(x[[i]]), error = function(e) FALSE))) {
+        res[[num <<- num + 1L]] <<- append(idx, i)
+      } else {
+        if (is.list(x[[i]])) {
+          walk(x[[i]], append(idx, i))
+        }
+      }
+    }
+  }
+  walk(x, integer())
+  res
 }
