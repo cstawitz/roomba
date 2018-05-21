@@ -14,4 +14,5 @@ VignetteBuilder: knitr
 RoxygenNote: 6.0.1.9000
 Imports: 
     purrr,
-    magrittr
+    magrittr,
+    assertthat
