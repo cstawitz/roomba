@@ -1,5 +1,5 @@
-Package: roomba
 Type: Package
+Package: roomba
 Title: What the Package Does (Title Case)
 Version: 0.1.0
 Author: Who wrote it
@@ -9,14 +9,19 @@ Description: More about what it does (maybe more than one line)
 License: MIT + file LICENSE
 Encoding: UTF-8
 Depends:
-    R (>= 3.0),
-    assertthat
+    R (>= 3.0)
 LazyData: true
 RoxygenNote: 6.0.1
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 Imports: 
-    purrr,
-    magrittr,
-    assertthat
-  
+    assertthat,
+    magrittr
+    purrr
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+Encoding: UTF-8
+LazyData: true
+
