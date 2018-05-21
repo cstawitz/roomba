@@ -40,6 +40,8 @@ devtools::install_github("ropenscilabs/roomba")
 ## Example
 
 ```{r example}
+library(roomba)
+
 x <- jsonlite::fromJSON('
   {
     "stuff": {
@@ -48,7 +50,8 @@ x <- jsonlite::fromJSON('
         {
           "goodstuff": "here",
           "name": "Bob Rudis",
-          "secret_power": 5
+          "secret_power": 5,
+          "other_secret_power": []
         },
         {
           "goodstuff": "here",
@@ -62,7 +65,8 @@ x <- jsonlite::fromJSON('
           "foo": [
           {
             "goodstuff": 5,
-            "name": "barb"
+            "name": "barb",
+            "secret_power": []
           }
             ]
         }
@@ -70,7 +74,9 @@ x <- jsonlite::fromJSON('
     }
   }', simplifyVector = FALSE)
 
+
 x %>%
+  purrr::map(replace_null) %>% 
   dfs_idx(~ .x$goodstuff == "here") %>%
   purrr:::map_dfr(~ x[[.x]])
 ```
