@@ -76,6 +76,10 @@ toy_data <- jsonlite::fromJSON('
             "goodstuff": 5,
             "name": "barb",
             "secret_power": []
+          },
+          {
+             "goodstuff": "here",
+             "name": "borris"
           }
             ]
         }
