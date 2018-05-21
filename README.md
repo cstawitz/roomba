@@ -24,7 +24,16 @@ Example
 library(roomba)
 #> Loading required package: assertthat
 
-x <- jsonlite::fromJSON('
+replace_null <- function(x, replacement = NA_character_) {
+  empty_idx <- dfs_idx(x, ~ length(.x) == 0)
+  for (i in empty_idx) {
+    x[[i]] <- replacement
+  }
+  x
+}
+
+
+toy_data <- jsonlite::fromJSON('
   {
     "stuff": {
       "buried": {
@@ -57,43 +66,14 @@ x <- jsonlite::fromJSON('
   }', simplifyVector = FALSE)
 
 
-x <- jsonlite::fromJSON('
-  {
-    "stuff": {
-      "buried": {
-        "deep": [
-        {
-          "goodstuff": "here",
-          "name": "Bob Rudis",
-          "secret_power": 5
-        },
-        {
-          "goodstuff": "here",
-          "name": "Amanda Dobbyn",
-          "secret_power": 4, 
-          "more_nested_stuff": 4
-        }
-        ],
-        "alsodeep": 2342423234,
-        "deeper": {
-          "foo": [
-          {
-            "goodstuff": 5,
-            "name": "barb",
-            "secret_power": []
-          }
-            ]
-        }
-      }
-    }
-  }', simplifyVector = FALSE)
+# Replace the NULLs at every level with the default replacement, NA
+y <- toy_data %>% replace_null() 
 
-x %>%
-  dfs_idx(~ .x$goodstuff == "here") %>%
-  purrr:::map_dfr(~ x[[.x]])
-#> # A tibble: 2 x 4
-#>   goodstuff name          secret_power more_nested_stuff
-#>   <chr>     <chr>                <int>             <int>
-#> 1 here      Bob Rudis                5                NA
-#> 2 here      Amanda Dobbyn            4                 4
+y %>% dfs_idx(~ .x$goodstuff == "here") %>%
+  purrr:::map_dfr(~ y[[.x]])
+#> # A tibble: 2 x 5
+#>   goodstuff name          secret_power other_secret_power more_nested_stu…
+#>   <chr>     <chr>                <int> <chr>                         <int>
+#> 1 here      Bob Rudis                5 <NA>                             NA
+#> 2 here      Amanda Dobbyn            4 <NA>                              4
 ```

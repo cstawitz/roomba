@@ -42,16 +42,7 @@ devtools::install_github("ropenscilabs/roomba")
 ```{r example}
 library(roomba)
 
-replace_null <- function(x, replacement = NA_character_) {
-  empty_idx <- dfs_idx(x, ~ length(.x) == 0)
-  for (i in empty_idx) {
-    x[[i]] <- replacement
-  }
-  x
-}
-
-
-x <- jsonlite::fromJSON('
+toy_data <- jsonlite::fromJSON('
   {
     "stuff": {
       "buried": {
@@ -84,7 +75,8 @@ x <- jsonlite::fromJSON('
   }', simplifyVector = FALSE)
 
 
-y <- x %>% replace_null() 
+# Replace the NULLs at every level with the default replacement, NA
+y <- toy_data %>% replace_null() 
 
 y %>% dfs_idx(~ .x$goodstuff == "here") %>%
   purrr:::map_dfr(~ y[[.x]])
