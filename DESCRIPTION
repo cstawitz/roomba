@@ -20,3 +20,5 @@ Imports:
     purrr,
     magrittr,
     assertthat
+Depends:
+  assertthat
