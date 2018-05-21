@@ -12,3 +12,5 @@ Depends:
     R (>= 3.0)
 LazyData: true
 RoxygenNote: 6.0.1
+Depends:
+  assertthat
