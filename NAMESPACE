@@ -2,4 +2,5 @@
 
 export("%>%")
 export(dfs_idx)
+export(roomba)
 importFrom(magrittr,"%>%")
