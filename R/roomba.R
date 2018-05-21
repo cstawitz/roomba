@@ -17,7 +17,6 @@ NULL
 #'
 #' @name twitter_data
 #' @rdname example_data
-#' @export
 #' @docType data
 #' @keywords twitter data
 #' @examples
