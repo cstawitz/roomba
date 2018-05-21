@@ -2,8 +2,6 @@
 output: github_document
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -77,6 +75,7 @@ toy_data <- jsonlite::fromJSON('
 
 # Replace the NULLs at every level with the default replacement, NA
 y <- toy_data %>% replace_null() 
+y
 
 y %>% dfs_idx(~ .x$goodstuff == "here") %>%
   purrr:::map_dfr(~ y[[.x]])
