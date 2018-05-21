@@ -8,3 +8,15 @@ replace_null <- function(x, replacement = NA_character_) {
 
 #' vec <- list(c("a", "b"), x = NULL)
 #' purrr::map(vec, replace_null, replacement = "foo")
+
+
+replace_single_null <- function(e, replacement = NA_character_) {
+  if (length(e)) {
+    return(e)
+  } else {
+    e <- replacement
+    return(e)
+  }
+}
+
+

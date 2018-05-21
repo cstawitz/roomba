@@ -3,6 +3,7 @@
 #' @export
 dfs_idx <- function(.x, .f) {
   .f <- purrr::as_mapper(.f)
+  .x <- .x %>% replace_null()
   res <- list()
   num <- 0L
   walk <- function(x, idx) {
