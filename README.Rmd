@@ -2,8 +2,6 @@
 output: github_document
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -39,8 +37,21 @@ devtools::install_github("ropenscilabs/roomba")
 ```
 ## Example
 
+```{r, echo=FALSE}
+replace_null <- function(x, replacement = NA_character_) {
+  empty_idx <- dfs_idx(x, ~ length(.x) == 0)
+  for (i in empty_idx) {
+    x[[i]] <- replacement
+  }
+  x
+}
+```
+
+
 ```{r example}
-x <- jsonlite::fromJSON('
+library(roomba)
+
+toy_data <- jsonlite::fromJSON('
   {
     "stuff": {
       "buried": {
@@ -48,7 +59,8 @@ x <- jsonlite::fromJSON('
         {
           "goodstuff": "here",
           "name": "Bob Rudis",
-          "secret_power": 5
+          "secret_power": 5,
+          "other_secret_power": []
         },
         {
           "goodstuff": "here",
@@ -62,7 +74,8 @@ x <- jsonlite::fromJSON('
           "foo": [
           {
             "goodstuff": 5,
-            "name": "barb"
+            "name": "barb",
+            "secret_power": []
           }
             ]
         }
@@ -70,7 +83,11 @@ x <- jsonlite::fromJSON('
     }
   }', simplifyVector = FALSE)
 
-x %>%
-  dfs_idx(~ .x$goodstuff == "here") %>%
-  purrr:::map_dfr(~ x[[.x]])
+
+# Replace the NULLs at every level with the default replacement, NA
+y <- toy_data %>% replace_null() 
+y
+
+y %>% dfs_idx(~ .x$goodstuff == "here") %>%
+  purrr:::map_dfr(~ y[[.x]])
 ```
