@@ -1,4 +1,3 @@
-
 #' Perform a recursive depth first search of a function
 #' @inheritParams purrr::map
 #' @export
