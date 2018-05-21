@@ -1,6 +1,8 @@
 #' Roomba
 #'
 #' @description Tidy your nested list
+#' @param x Element to replace
+#' @param replacement Replacement for NULL values. Defaults to NA_character_.
 #' @param inp Element to replace
 #' @param clean Should NULL values be changed to NAs?
 #' @param replacement Replacement for NULL values. Defaults to NA_character_.
@@ -13,8 +15,7 @@
 #'
 #'
 #'
-#'
-#'
+
 
 roomba <- function(inp, replacement = NA_character_,
                    rows = NULL, cols = NULL) {
