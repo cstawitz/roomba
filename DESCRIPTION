@@ -8,6 +8,10 @@ Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: MIT + file LICENSE
 Encoding: UTF-8
+Depends:
+    R (>= 3.0)
+LazyData: true
+RoxygenNote: 6.0.1
 LazyData: true
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
@@ -16,3 +20,5 @@ Imports:
     purrr,
     magrittr,
     assertthat
+Depends:
+  assertthat
