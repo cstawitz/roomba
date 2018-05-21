@@ -62,7 +62,11 @@ x <- jsonlite::fromJSON('
   }', simplifyVector = FALSE)
 
 x %>%
-  dfs_idx(~ x$goodstuff == "here") %>%
-  purrr::map_dfr(~ x[[.x]])
-#> # A tibble: 0 x 0
+  dfs_idx(~ .x$goodstuff == "here") %>%
+  purrr:::map_dfr(~ x[[.x]])
+#> # A tibble: 2 x 4
+#>   goodstuff name          secret_power more_nested_stuff
+#>   <chr>     <chr>                <int>             <int>
+#> 1 here      Bob Rudis                5                NA
+#> 2 here      Amanda Dobbyn            4                 4
 ```

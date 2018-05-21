@@ -71,6 +71,6 @@ x <- jsonlite::fromJSON('
   }', simplifyVector = FALSE)
 
 x %>%
-  dfs_idx(~ x$goodstuff == "here") %>%
-  purrr::map_dfr(~ x[[.x]])
+  dfs_idx(~ .x$goodstuff == "here") %>%
+  purrr:::map_dfr(~ x[[.x]])
 ```
