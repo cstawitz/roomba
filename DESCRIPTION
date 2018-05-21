@@ -9,16 +9,14 @@ Description: More about what it does (maybe more than one line)
 License: MIT + file LICENSE
 Encoding: UTF-8
 Depends:
-    R (>= 3.0)
+    R (>= 3.0),
+    assertthat
 LazyData: true
 RoxygenNote: 6.0.1
-LazyData: true
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
-RoxygenNote: 6.0.1.9000
 Imports: 
     purrr,
     magrittr,
     assertthat
-Depends:
-  assertthat
+  
