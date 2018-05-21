@@ -40,37 +40,16 @@ devtools::install_github("ropenscilabs/roomba")
 ## Example
 
 ```{r example}
-x <- jsonlite::fromJSON('
-  {
-    "stuff": {
-      "buried": {
-        "deep": [
-        {
-          "goodstuff": "here",
-          "name": "Bob Rudis",
-          "secret_power": 5
-        },
-        {
-          "goodstuff": "here",
-          "name": "Amanda Dobbyn",
-          "secret_power": 4, 
-          "more_nested_stuff": 4
-        }
-        ],
-        "alsodeep": 2342423234,
-        "deeper": {
-          "foo": [
-          {
-            "goodstuff": 5,
-            "name": "barb"
-          }
-            ]
-        }
-      }
-    }
-  }', simplifyVector = FALSE)
+x <- data(example_data)
 
+#Existing example
 x %>%
   dfs_idx(~ .x$goodstuff == "here") %>%
   purrr:::map_dfr(~ x[[.x]])
+
+#Eventual roomba syntax
+x %>%
+  roomba(rows=c('goodstuff'),
+         cols = c('name','secret_power',
+                  'more_nested_stuff'))
 ```
