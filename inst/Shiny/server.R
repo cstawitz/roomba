@@ -14,16 +14,17 @@ server <- function(input, output) {
     }
     return(x)
   })
-
+  
   #Print names of first level list items
   output$varSet <- renderUI({
     dataset <- datasetInput()
     column.names <- roomba::list_names(dataset)
     checkboxGroupInput("Variables","Choose variables", column.names) 
   })
-
-  # Show the first "n" observations ----
-  #output$view <- renderTable({
-  #  head(datasetInput(), n = input$obs)
-  #})
+  
+  output$plot <- eventReactive(input$makePlot, 
+                  { 
+                    dataset <- datasetInput()
+                    thedata <-roomba::roomba(dataset, input$Variables) 
+                    renderPlot(thedata)})
 }
