@@ -16,9 +16,10 @@ server <- function(input, output) {
   })
 
   #Print names of first level list items
-  output$names <- renderTable({
+  output$varSet <- renderUI({
     dataset <- datasetInput()
-    roomba::list_names(dataset)
+    column.names <- roomba::list_names(dataset)
+    checkboxGroupInput("Variables","Choose variables", column.names) 
   })
 
   # Show the first "n" observations ----
