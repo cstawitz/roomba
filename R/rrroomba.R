@@ -2,8 +2,8 @@
 #'
 #' @description Tidy your nested list
 #' @param inp List to tidy
-#' @param replacement Replacement for NULL values. Defaults to NA.
 #' @param cols Columns to keep
+#' @param .default Replacement for NULL values. Defaults to NA.
 #' @param .keep Should all or any data be kept?
 #'
 #' @export
