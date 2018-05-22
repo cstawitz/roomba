@@ -13,8 +13,11 @@ This is a package to transform large, multi-nested lists into a more user-friend
 *Key features:*
 
 -   `roomba()` searches deeply-nested list for names specified in `cols` (a character vector) and returns a `tibble` with the associated column titles. Nothing further about nesting hierarchy or depth need be specified.
+
 -   Handles empty values gracefully by substituting `NULL` values with `NA` or user-specified value in `default`, or truncates lists appropriately.
+
 -   If you're only interested in sniffing out and replacing all `NULL`s, turn to the `replace_null()` function.
+
 -   Option to `keep` `any` or `all` data from the columns supplied
 
 Installation
@@ -26,9 +29,6 @@ You can install the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("ropenscilabs/roomba")
 ```
-
-Example
--------
 
 Say we have some JSON from a pesky API.
 
@@ -110,7 +110,7 @@ roomba(twitter_data, c("created_at", "name"))
 #>    name                 created_at                    
 #>    <chr>                <chr>                         
 #>  1 Code for America     Mon Aug 10 18:59:29 +0000 2009
-#>  2 Ben Lorica 罗瑞卡    Mon Dec 22 22:06:18 +0000 2008
+#>  2 Ben Lorica <U+7F57><U+745E><U+5361>    Mon Dec 22 22:06:18 +0000 2008
 #>  3 Dan Sholler          Thu Apr 03 20:09:24 +0000 2014
 #>  4 Code for America     Mon Aug 10 18:59:29 +0000 2009
 #>  5 FiveThirtyEight      Tue Jan 21 21:39:32 +0000 2014
@@ -121,8 +121,6 @@ roomba(twitter_data, c("created_at", "name"))
 #> 10 Ryan Frederick       Sun Mar 01 19:06:53 +0000 2009
 #> # ... with 14 more rows
 ```
-
-------------------------------------------------------------------------
 
 Feast your eyes on the original `super_data` list!
 
