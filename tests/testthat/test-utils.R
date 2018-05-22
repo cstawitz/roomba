@@ -1,5 +1,8 @@
 context("roomba utility function tests")
 
+library(purrr)
+library(dplyr)
+
 test_that("Test that replace_null() works as expected", {
   # Test that replace_null() works as expected
   lst <- list(c("a", "b"), x = NULL)
