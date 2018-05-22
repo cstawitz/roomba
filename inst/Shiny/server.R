@@ -8,7 +8,7 @@ server <- function(input, output) {
     #Determine if input file is .json or .rda
     if(tools::file_ext(input$data$name)=="json") {
       jsonlite::fromJSON(input$data$datapath)
-    } else if(tools::file_ext(input$data$name)==".rda"){
+    } else if(tools::file_ext(input$data$name)=="rda"){
       load(input$data$datapath)
     }
   })
