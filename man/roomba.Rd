@@ -4,20 +4,22 @@
 \alias{roomba}
 \title{Roomba}
 \usage{
-roomba(inp, clean = TRUE, replacement = NA_character_, rows = NULL,
-  cols = NULL)
+roomba(inp, cols = NULL, default = NA, keep = all)
 }
 \arguments{
-\item{inp}{Element to replace}
+\item{inp}{List to tidy}
 
-\item{clean}{Should NULL values be changed to NAs?}
+\item{cols}{Columns to keep}
 
-\item{replacement}{Replacement for NULL values. Defaults to NA_character_.}
+\item{default}{Replacement for NULL values. Defaults to NA.}
 
-\item{rows}{id to label rows}
-
-\item{cols}{columns to include}
+\item{keep}{Should all or any data be kept?}
 }
 \description{
 Tidy your nested list
+}
+\examples{
+
+simple \%>\% roomba(cols = c("name", "goodstuff"), keep = any)
+simple \%>\% roomba(cols = c("name", "goodstuff", ""), keep = any)
 }

@@ -15,12 +15,12 @@ Suggests:
     rmarkdown,
     testthat,
     jsonlite,
-    rlist,
-    dplyr
+    rlist
 VignetteBuilder: knitr
 Imports: 
     assertthat,
     magrittr,
+    dplyr,
     purrr
 Encoding: UTF-8
 LazyData: true
