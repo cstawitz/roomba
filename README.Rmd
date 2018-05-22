@@ -20,6 +20,13 @@ processing of return values from `jsonlite::fromJSON()` queries more seamless,
 but ideally this package should be useful for deeply-nested lists from an array
 of sources.
 
+<!-- ![roomba_gif](https://media.giphy.com/media/mwMowfcaEcvpm/giphy.gif) -->
+
+<p align="center">
+  <img src="https://media.giphy.com/media/mP9hvHDhy4E9i/giphy.gif" alt="roomba_gif">
+</p>
+
+
 *Key features:*
 
 * `roomba()` searches deeply-nested list for names specified in
@@ -41,9 +48,54 @@ devtools::install_github("ropenscilabs/roomba")
 
 ## Example
 
+```{r, echo=FALSE}
+replace_null <- function(x, replacement = NA) {
+  empty_idx <- dfs_idx(x, ~ length(.x) == 0 || is.na(.x))
+  for (i in empty_idx) {
+    x[[i]] <- replacement
+  }
+  x
+}
+
+
+roomba <- function(inp, cols = NULL, default = NA,
+                    keep = all) {
+
+  assertthat::assert_that(length(inp) > 0,
+                          msg = "Input is of length 0.")
+
+  assertthat::assert_that(!is.null(cols),
+                          msg = "cols must be non-NULL.")
+
+  keep <- match.fun(keep)
+
+  inp_clean <- inp %>%
+    replace_null(replacement = default)
+  # -- Message that NULLs were replaced with NAs?
+
+  has_good_stuff <- function(data, cols) {
+    keep(purrr::map_lgl(cols, ~ length(data[[.x]]) > 0))
+  }
+
+  indices <-
+    dfs_idx(inp_clean, ~ has_good_stuff(data = .x, cols = cols))
+
+  out <- indices %>% purrr::map(
+    function(.x) {
+      res <- inp[[.x]]
+      res[names(res) %in% cols]
+    }) %>% replace_null() %>%
+  dplyr::bind_rows()
+
+  return(out)
+}
+
+```
+
+
 Say we have some JSON from a pesky API.
 
-```{r example}
+```{r example, message=FALSE}
 library(roomba)
 
 json <- '
@@ -53,15 +105,14 @@ json <- '
         "deep": [
         {
           "location": "here",
-          "name": "Bob Rudis",
-          "super_power": "invisibility",
-          "other_secret_power": []
-        },
-        {
-          "location": "here",
           "name": "Amanda Dobbyn",
           "secret_power": "flight",
           "more_nested_stuff": 4
+        },
+        {
+            "location": "here",
+            "name": "Isabella Velasquez",
+            "secret_power": "teleportation"
         }
         ],
         "alsodeep": 2342423234,
@@ -74,17 +125,14 @@ json <- '
           },
           {
             "location": "here",
-            "name": "Isabella Velasquez",
-            "secret_power": "shape-shifting"
-          },
-          {
-            "location": "here",
             "name": "Christine Stawitz",
-            "secret_power": "shape-shifting"
+            "secret_power": "invisibility"
           },
           {
-             "location": "here",
-             "name": "Borris"
+          "location": "here",
+          "name": "Laura DeCicco",
+          "super_power": "fixing merge conflicts",
+          "other_secret_power": []
           }
           ]
         }
@@ -108,11 +156,7 @@ super_data %>%
 ```
 
 
-Let's try with a real-world Twitter example.
-
-```{r}
-twitter_data[[1]]
-```
+Let's try with a real-world Twitter example (see package data to use this data).
 
 
 ```{r}
@@ -120,4 +164,23 @@ roomba(twitter_data, c("created_at", "name"))
 ```
 
 
+***
 
+Feast your eyes on the original `super_data` list!
+
+```{r}
+super_data
+```
+
+And just the *first* element of the `twitter` dataset `r emo::ji("scream")`
+
+```{r}
+twitter_data[[1]]
+```
+
+
+<br>
+
+**Happy cleaning!**
+
+![](https://media.giphy.com/media/mwMowfcaEcvpm/giphy.gif)
