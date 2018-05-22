@@ -38,19 +38,6 @@ You can install the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("ropenscilabs/roomba")
 ```
-
-## Example
-
-```{r, echo=FALSE}
-replace_null <- function(x, replacement = NA) {
-  empty_idx <- dfs_idx(x, ~ length(.x) == 0 || is.na(.x))
-  for (i in empty_idx) {
-    x[[i]] <- replacement
-  }
-  x
-}
-```
-
 Say we have some JSON from a pesky API.
 
 ```{r example}
@@ -109,3 +96,9 @@ Which we can pull data into the columns we want with `roomba`.
 super_data %>%
   roomba(cols = c("name", "super_power", "location"), keep = any)
 ```
+
+
+
+
+
+
