@@ -10,14 +10,16 @@ making processing of return values from `jsonlite::fromJSON()` queries
 more seamless, but ideally this package should be useful for
 deeply-nested lists from an array of sources.
 
-Key features of the package: \* `roomba(rows = , cols = )` searches
-deeply-nested list for names specified in `rows` or `cols` arguments
-(string vectors) and returns a `tibble` with the associated row or
-column titles. Nothing further about nesting hierarchy or depth need be
-specified. \* handles empty values gracefully via `replace_nulls()`
-function that substitutes `NULL` values with `NA` or user-specified
-value, or truncates lists appropriately. The goal of roomba is to tidy
-recursive lists.
+*Key features:*
+
+  - `roomba()` searches deeply-nested list for names specified in `cols`
+    (a character vector) and returns a `tibble` with the associated
+    column titles. Nothing further about nesting hierarchy or depth need
+    be specified.
+  - Handles empty values gracefully by substituting `NULL` values with
+    `NA` or user-specified value in `.default`, or truncates lists
+    appropriately.
+  - Option to `.keep` `any` or `all` data from the columns supplied
 
 ## Installation
 
@@ -31,10 +33,12 @@ devtools::install_github("ropenscilabs/roomba")
 
 ## Example
 
+Say we have some JSON from a pesky API.
+
 ``` r
 library(roomba)
 
-toy_data <- jsonlite::fromJSON('
+json <- '
   {
     "stuff": {
       "buried": {
@@ -68,15 +72,25 @@ toy_data <- jsonlite::fromJSON('
         }
       }
     }
-  }', simplifyVector = FALSE)
+  }'
+```
 
-toy_data %>%
-  roomba(cols = c("name", "location", "secret_power", "other_secret_power"), keep = any)
-#> # A tibble: 4 x 4
-#>   location name          other_secret_power secret_power
-#>   <chr>    <chr>         <lgl>              <chr>       
-#> 1 here     Bob Rudis     NA                 <NA>        
-#> 2 here     Amanda Dobbyn NA                 flight      
-#> 3 not here Jim Hester    NA                 <NA>        
-#> 4 here     Borris        NA                 <NA>
+The JSON becomes a nested R list
+
+``` r
+super_data <- jsonlite::fromJSON(json, simplifyVector = FALSE)
+```
+
+Which we can pull data into the columns we want with `roomba`.
+
+``` r
+super_data %>%
+  roomba(cols = c("name", "secret_power", "location"), keep = any)
+#> # A tibble: 4 x 3
+#>   location name          secret_power
+#>   <chr>    <chr>         <chr>       
+#> 1 here     Bob Rudis     <NA>        
+#> 2 here     Amanda Dobbyn flight      
+#> 3 not here Jim Hester    <NA>        
+#> 4 here     Borris        <NA>
 ```
