@@ -2,9 +2,6 @@
 #'
 #' Run the roomba app
 #' @export
-#' @import shiny
-#' @import ggplot2
-#' @importFrom jsonlite fromJSON
 #' @param browse Logical. Use browser for running Shiny app.
 #' @examples
 #' \dontrun{
