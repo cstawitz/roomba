@@ -14,9 +14,9 @@ server <- function(input, output) {
   })
   
   #Print names of first level list items
-  output$names <- renderPrint({
+  output$names <- renderTable({
     dataset <- datasetInput()
-    names(dataset)
+    roomba::list_names(dataset)
   })
   
   # Show the first "n" observations ----
