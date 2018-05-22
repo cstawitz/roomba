@@ -27,7 +27,8 @@ Suggests:
     jsonlite,
     knitr,
     rmarkdown,
-    testthat
+    testthat,
+    shiny
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
