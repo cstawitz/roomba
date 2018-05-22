@@ -6,12 +6,14 @@ roomba
 
 This is a package to transform large, multi-nested lists into a more user-friendly format (i.e. a `tibble`) in `R`. The initial focus is on making processing of return values from `jsonlite::fromJSON()` queries more seamless, but ideally this package should be useful for deeply-nested lists from an array of sources.
 
+<!-- ![roomba_gif](https://media.giphy.com/media/mwMowfcaEcvpm/giphy.gif) -->
+<p align="center">
+<img src="https://media.giphy.com/media/mP9hvHDhy4E9i/giphy.gif" alt="roomba_gif">
+</p>
 *Key features:*
 
 -   `roomba()` searches deeply-nested list for names specified in `cols` (a character vector) and returns a `tibble` with the associated column titles. Nothing further about nesting hierarchy or depth need be specified.
-
 -   Handles empty values gracefully by substituting `NULL` values with `NA` or user-specified value in `.default`, or truncates lists appropriately.
-
 -   Option to `.keep` `any` or `all` data from the columns supplied
 
 Installation
@@ -39,19 +41,14 @@ json <- '
         "deep": [
         {
           "location": "here",
-          "name": "Amanda",
-          "super_power": "flight",
+          "name": "Amanda Dobbyn",
+          "secret_power": "flight",
           "more_nested_stuff": 4
         },
         {
-          "location": "here",
-          "name": "Christine",
-          "super_power": "water-breathing"
-        },
-        {
-          "location": "here",
-          "name": "Isabella",
-          "super_power": "teleportation"
+            "location": "here",
+            "name": "Isabella Velasquez",
+            "secret_power": "teleportation"
         }
         ],
         "alsodeep": 2342423234,
@@ -59,22 +56,19 @@ json <- '
           "foo": [
           {
             "location": "not here",
-            "name": "Jim"
-          },
-          {
-            "location": "here",
-            "name": "Isabella Velasquez",
-            "secret_power": "shape-shifting"
+            "name": "Jim Hester",
+            "secret_power": []
           },
           {
             "location": "here",
             "name": "Christine Stawitz",
-            "secret_power": "shape-shifting"
+            "secret_power": "invisibility"
           },
           {
-             "location": "here",
-             "name": "Laura",
-             "super_power": "git"
+          "location": "here",
+          "name": "Laura DeCicco",
+          "super_power": "fixing merge conflicts",
+          "other_secret_power": []
           }
           ]
         }
@@ -94,23 +88,114 @@ Which we can pull data into the columns we want with `roomba`.
 
 ``` r
 super_data %>%
-  roomba(cols = c("name", "super_power", "location"), keep = any)
-#> # A tibble: 7 x 3
-#>   location name               super_power    
-#>   <chr>    <chr>              <chr>          
-#> 1 here     Amanda             flight         
-#> 2 here     Christine          water-breathing
-#> 3 here     Isabella           teleportation  
-#> 4 not here Jim                <NA>           
-#> 5 here     Isabella Velasquez <NA>           
-#> 6 here     Christine Stawitz  <NA>           
-#> 7 here     Laura              git
+  roomba(cols = c("name", "secret_power", "location"), keep = any)
+#> # A tibble: 5 x 3
+#>   location name               secret_power 
+#>   <chr>    <chr>              <chr>        
+#> 1 here     Amanda Dobbyn      flight       
+#> 2 here     Isabella Velasquez teleportation
+#> 3 not here Jim Hester         <NA>         
+#> 4 here     Christine Stawitz  invisibility 
+#> 5 here     Laura DeCicco      <NA>
 ```
 
-Twitter Example
----------------
+Let's try with a real-world Twitter example (see package data to use this data).
 
-Let's try with a real-world Twitter example.
+``` r
+roomba(twitter_data, c("created_at", "name"))
+#> # A tibble: 24 x 2
+#>    name                 created_at                    
+#>    <chr>                <chr>                         
+#>  1 Code for America     Mon Aug 10 18:59:29 +0000 2009
+#>  2 Ben Lorica 罗瑞卡    Mon Dec 22 22:06:18 +0000 2008
+#>  3 Dan Sholler          Thu Apr 03 20:09:24 +0000 2014
+#>  4 Code for America     Mon Aug 10 18:59:29 +0000 2009
+#>  5 FiveThirtyEight      Tue Jan 21 21:39:32 +0000 2014
+#>  6 Digital Impact       Wed Oct 07 21:10:53 +0000 2009
+#>  7 Drew Williams        Thu Aug 07 18:41:29 +0000 2014
+#>  8 joe                  Fri May 29 13:25:25 +0000 2009
+#>  9 Data Analysts 4 Good Wed May 07 16:55:33 +0000 2014
+#> 10 Ryan Frederick       Sun Mar 01 19:06:53 +0000 2009
+#> # ... with 14 more rows
+```
+
+------------------------------------------------------------------------
+
+Feast your eyes on the original `super_data` list!
+
+``` r
+super_data
+#> $stuff
+#> $stuff$buried
+#> $stuff$buried$deep
+#> $stuff$buried$deep[[1]]
+#> $stuff$buried$deep[[1]]$location
+#> [1] "here"
+#> 
+#> $stuff$buried$deep[[1]]$name
+#> [1] "Amanda Dobbyn"
+#> 
+#> $stuff$buried$deep[[1]]$secret_power
+#> [1] "flight"
+#> 
+#> $stuff$buried$deep[[1]]$more_nested_stuff
+#> [1] 4
+#> 
+#> 
+#> $stuff$buried$deep[[2]]
+#> $stuff$buried$deep[[2]]$location
+#> [1] "here"
+#> 
+#> $stuff$buried$deep[[2]]$name
+#> [1] "Isabella Velasquez"
+#> 
+#> $stuff$buried$deep[[2]]$secret_power
+#> [1] "teleportation"
+#> 
+#> 
+#> 
+#> $stuff$buried$alsodeep
+#> [1] 2342423234
+#> 
+#> $stuff$buried$deeper
+#> $stuff$buried$deeper$foo
+#> $stuff$buried$deeper$foo[[1]]
+#> $stuff$buried$deeper$foo[[1]]$location
+#> [1] "not here"
+#> 
+#> $stuff$buried$deeper$foo[[1]]$name
+#> [1] "Jim Hester"
+#> 
+#> $stuff$buried$deeper$foo[[1]]$secret_power
+#> list()
+#> 
+#> 
+#> $stuff$buried$deeper$foo[[2]]
+#> $stuff$buried$deeper$foo[[2]]$location
+#> [1] "here"
+#> 
+#> $stuff$buried$deeper$foo[[2]]$name
+#> [1] "Christine Stawitz"
+#> 
+#> $stuff$buried$deeper$foo[[2]]$secret_power
+#> [1] "invisibility"
+#> 
+#> 
+#> $stuff$buried$deeper$foo[[3]]
+#> $stuff$buried$deeper$foo[[3]]$location
+#> [1] "here"
+#> 
+#> $stuff$buried$deeper$foo[[3]]$name
+#> [1] "Laura DeCicco"
+#> 
+#> $stuff$buried$deeper$foo[[3]]$super_power
+#> [1] "fixing merge conflicts"
+#> 
+#> $stuff$buried$deeper$foo[[3]]$other_secret_power
+#> list()
+```
+
+And just the *first* element of the `twitter` dataset 😱
 
 ``` r
 twitter_data[[1]]
@@ -371,20 +456,8 @@ twitter_data[[1]]
 #> [1] "en"
 ```
 
-``` r
-roomba(twitter_data, c("created_at", "name"))
-#> # A tibble: 24 x 2
-#>    name                 created_at                    
-#>    <chr>                <chr>                         
-#>  1 Code for America     Mon Aug 10 18:59:29 +0000 2009
-#>  2 Ben Lorica <U+7F57><U+745E><U+5361>    Mon Dec 22 22:06:18 +0000 2008
-#>  3 Dan Sholler          Thu Apr 03 20:09:24 +0000 2014
-#>  4 Code for America     Mon Aug 10 18:59:29 +0000 2009
-#>  5 FiveThirtyEight      Tue Jan 21 21:39:32 +0000 2014
-#>  6 Digital Impact       Wed Oct 07 21:10:53 +0000 2009
-#>  7 Drew Williams        Thu Aug 07 18:41:29 +0000 2014
-#>  8 joe                  Fri May 29 13:25:25 +0000 2009
-#>  9 Data Analysts 4 Good Wed May 07 16:55:33 +0000 2014
-#> 10 Ryan Frederick       Sun Mar 01 19:06:53 +0000 2009
-#> # ... with 14 more rows
-```
+<br>
+
+**Happy cleaning!**
+
+![](https://media.giphy.com/media/mwMowfcaEcvpm/giphy.gif)
