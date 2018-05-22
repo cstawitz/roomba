@@ -1,6 +1,7 @@
 #' List all names in a list
+#' @param x list to use
 #' @export
-list_names <- function(x, replacement = NA) {
+list_names <- function(x) {
   name_idx <- dfs_idx(x, ~ length(names(.x)) > 0)
   unique(unlist(purrr::map(name_idx, ~ names(x[[.x]]))))
 }
