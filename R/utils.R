@@ -19,3 +19,11 @@ replace_single_null <- function(e, replacement = NA_character_) {
 
 #' vec <- list(c("a", "b"), x = NULL)
 #' purrr::map(vec, replace_null, replacement = "foo")
+
+
+
+has_good_stuff <- function(x, y) {
+  if (length(x[[y]]) > 0) {
+    return(x[[y]])
+  }
+}
