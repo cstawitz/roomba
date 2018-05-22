@@ -94,4 +94,9 @@ y
 
 y %>% dfs_idx(~ .x$goodstuff == "here") %>%
   purrr:::map_dfr(~ y[[.x]])
+
+y %>% 
+  dfs_idx(~ length(.x[["name"]]) > 0 && length(.x[["secret_power"]]) > 0) %>% 
+  purrr:::map_dfr(~ y[[.x]]) %>% 
+  dplyr::select(secret_power, name)
 ```
