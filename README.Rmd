@@ -97,7 +97,8 @@ json <- '
 The JSON becomes a nested R list
 
 ```{r}
-super_data <- jsonlite::fromJSON(json, simplifyVector = FALSE)
+super_data <- json %>% 
+  jsonlite::fromJSON(simplifyVector = FALSE)
 ```
 
 which we can pull data into the columns we want with `roomba`.
