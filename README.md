@@ -14,6 +14,7 @@ This is a package to transform large, multi-nested lists into a more user-friend
 
 -   `roomba()` searches deeply-nested list for names specified in `cols` (a character vector) and returns a `tibble` with the associated column titles. Nothing further about nesting hierarchy or depth need be specified.
 -   Handles empty values gracefully by substituting `NULL` values with `NA` or user-specified value in `default`, or truncates lists appropriately.
+-   If you're only interested in sniffing out and replacing all `NULL`s, turn to the `replace_null()` function.
 -   Option to `keep` `any` or `all` data from the columns supplied
 
 Installation

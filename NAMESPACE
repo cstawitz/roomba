@@ -3,5 +3,6 @@
 export("%>%")
 export(dfs_idx)
 export(list_names)
+export(replace_null)
 export(roomba)
 importFrom(magrittr,"%>%")

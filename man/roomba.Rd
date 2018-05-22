@@ -21,5 +21,5 @@ Tidy your nested list
 \examples{
 
 simple \%>\% roomba(cols = c("name", "goodstuff"), keep = any)
-simple \%>\% roomba(cols = c("name", "goodstuff", ""), keep = any)
+simple \%>\% roomba(cols = c("name", "goodstuff"), keep = any)
 }
