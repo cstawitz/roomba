@@ -1,8 +1,9 @@
 #' List all names in a list
+#' @param x Input list
 #' @export
-list_names <- function(x, replacement = NA) {
+list_names <- function(x) {
   name_idx <- dfs_idx(x, ~ length(names(.x)) > 0)
-  unique(unlist(map(name_idx, ~ names(x[[.x]]))))
+  unique(unlist(purrr::map(name_idx, ~ names(x[[.x]]))))
 }
 
 replace_null <- function(x, replacement = NA) {
@@ -20,16 +21,5 @@ replace_single_null <- function(e, replacement = NA_character_) {
   } else {
     e <- replacement
     return(e)
-  }
-}
-
-#' vec <- list(c("a", "b"), x = NULL)
-#' purrr::map(vec, replace_null, replacement = "foo")
-
-
-
-has_good_stuff <- function(x, y) {
-  if (length(x[[y]]) > 0) {
-    return(x[[y]])
   }
 }
