@@ -6,7 +6,6 @@ list_names <- function(x) {
   unique(unlist(purrr::map(name_idx, ~ names(x[[.x]]))))
 }
 
-
 replace_single_null <- function(e, replacement = NA_character_) {
   if (length(e)) {
     return(e)

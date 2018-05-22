@@ -42,9 +42,9 @@ content(req)
 We provide actual Twitter data as an example, which can be loaded using `data(twitter_data).`
 
 ```{r, message = FALSE}
-library(tidyverse)
+library(ggplot2)
+library(magrittr)
 library(roomba)
-data("twitter_data")
 ```
 
 Using the `roomba()` function will gather information based on your variables of interest (in this case, followers_count and friends_count). From there, you can use other `dplyr` functions on your data.
