@@ -13,8 +13,8 @@ This is a package to transform large, multi-nested lists into a more user-friend
 *Key features:*
 
 -   `roomba()` searches deeply-nested list for names specified in `cols` (a character vector) and returns a `tibble` with the associated column titles. Nothing further about nesting hierarchy or depth need be specified.
--   Handles empty values gracefully by substituting `NULL` values with `NA` or user-specified value in `.default`, or truncates lists appropriately.
--   Option to `.keep` `any` or `all` data from the columns supplied
+-   Handles empty values gracefully by substituting `NULL` values with `NA` or user-specified value in `default`, or truncates lists appropriately.
+-   Option to `keep` `any` or `all` data from the columns supplied
 
 Installation
 ------------
@@ -42,13 +42,13 @@ json <- '
         {
           "location": "here",
           "name": "Amanda Dobbyn",
-          "secret_power": "flight",
+          "super_power": "flight",
           "more_nested_stuff": 4
         },
         {
-            "location": "here",
-            "name": "Isabella Velasquez",
-            "secret_power": "teleportation"
+          "location": "here",
+          "name": "Isabella Velasquez",
+          "super_power": "teleportation"
         }
         ],
         "alsodeep": 2342423234,
@@ -57,12 +57,12 @@ json <- '
           {
             "location": "not here",
             "name": "Jim Hester",
-            "secret_power": []
+            "super_power": []
           },
           {
             "location": "here",
             "name": "Christine Stawitz",
-            "secret_power": "invisibility"
+            "super_power": "invisibility"
           },
           {
           "location": "here",
@@ -88,15 +88,15 @@ Which we can pull data into the columns we want with `roomba`.
 
 ``` r
 super_data %>%
-  roomba(cols = c("name", "secret_power", "location"), keep = any)
+  roomba(cols = c("name", "super_power", "location"), keep = any)
 #> # A tibble: 5 x 3
-#>   location name               secret_power 
-#>   <chr>    <chr>              <chr>        
-#> 1 here     Amanda Dobbyn      flight       
-#> 2 here     Isabella Velasquez teleportation
-#> 3 not here Jim Hester         <NA>         
-#> 4 here     Christine Stawitz  invisibility 
-#> 5 here     Laura DeCicco      <NA>
+#>   location name               super_power           
+#>   <chr>    <chr>              <chr>                 
+#> 1 here     Amanda Dobbyn      flight                
+#> 2 here     Isabella Velasquez teleportation         
+#> 3 not here Jim Hester         <NA>                  
+#> 4 here     Christine Stawitz  invisibility          
+#> 5 here     Laura DeCicco      fixing merge conflicts
 ```
 
 Let's try with a real-world Twitter example (see package data to use this data).
@@ -135,7 +135,7 @@ super_data
 #> $stuff$buried$deep[[1]]$name
 #> [1] "Amanda Dobbyn"
 #> 
-#> $stuff$buried$deep[[1]]$secret_power
+#> $stuff$buried$deep[[1]]$super_power
 #> [1] "flight"
 #> 
 #> $stuff$buried$deep[[1]]$more_nested_stuff
@@ -149,7 +149,7 @@ super_data
 #> $stuff$buried$deep[[2]]$name
 #> [1] "Isabella Velasquez"
 #> 
-#> $stuff$buried$deep[[2]]$secret_power
+#> $stuff$buried$deep[[2]]$super_power
 #> [1] "teleportation"
 #> 
 #> 
@@ -166,7 +166,7 @@ super_data
 #> $stuff$buried$deeper$foo[[1]]$name
 #> [1] "Jim Hester"
 #> 
-#> $stuff$buried$deeper$foo[[1]]$secret_power
+#> $stuff$buried$deeper$foo[[1]]$super_power
 #> list()
 #> 
 #> 
@@ -177,7 +177,7 @@ super_data
 #> $stuff$buried$deeper$foo[[2]]$name
 #> [1] "Christine Stawitz"
 #> 
-#> $stuff$buried$deeper$foo[[2]]$secret_power
+#> $stuff$buried$deeper$foo[[2]]$super_power
 #> [1] "invisibility"
 #> 
 #> 

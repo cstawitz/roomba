@@ -34,8 +34,8 @@ of sources.
   associated column titles. Nothing further about nesting hierarchy or
   depth need be specified.
 * Handles empty values gracefully by substituting `NULL` values with 
- `NA` or user-specified value in `.default`, or truncates lists appropriately. 
- * Option to `.keep` `any` or `all` data from the columns supplied
+ `NA` or user-specified value in `default`, or truncates lists appropriately. 
+ * Option to `keep` `any` or `all` data from the columns supplied
 
 ## Installation
 
@@ -89,7 +89,6 @@ roomba <- function(inp, cols = NULL, default = NA,
 
   return(out)
 }
-
 ```
 
 
@@ -106,13 +105,13 @@ json <- '
         {
           "location": "here",
           "name": "Amanda Dobbyn",
-          "secret_power": "flight",
+          "super_power": "flight",
           "more_nested_stuff": 4
         },
         {
-            "location": "here",
-            "name": "Isabella Velasquez",
-            "secret_power": "teleportation"
+          "location": "here",
+          "name": "Isabella Velasquez",
+          "super_power": "teleportation"
         }
         ],
         "alsodeep": 2342423234,
@@ -121,12 +120,12 @@ json <- '
           {
             "location": "not here",
             "name": "Jim Hester",
-            "secret_power": []
+            "super_power": []
           },
           {
             "location": "here",
             "name": "Christine Stawitz",
-            "secret_power": "invisibility"
+            "super_power": "invisibility"
           },
           {
           "location": "here",
@@ -152,7 +151,7 @@ Which we can pull data into the columns we want with `roomba`.
 
 ```{r}
 super_data %>%
-  roomba(cols = c("name", "secret_power", "location"), keep = any)
+  roomba(cols = c("name", "super_power", "location"), keep = any)
 ```
 
 
