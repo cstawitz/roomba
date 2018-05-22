@@ -40,37 +40,37 @@ json <- '
     "stuff": {
       "buried": {
         "deep": [
-        {
-          "location": "here",
-          "name": "Amanda Dobbyn",
-          "super_power": "flight",
-          "more_nested_stuff": 4
-        },
-        {
-          "location": "here",
-          "name": "Isabella Velasquez",
-          "super_power": "teleportation"
-        }
+          {
+            "location": "here",
+            "name": "Laura DeCicco",
+            "super_power": "fixing merge conflicts",
+            "other_secret_power": []
+          },
+          {
+            "location": "here",
+            "name": "Amanda Dobbyn",
+            "super_power": "flight",
+            "more_nested_stuff": 4
+          }
         ],
         "alsodeep": 2342423234,
         "deeper": {
           "foo": [
-          {
-            "location": "not here",
-            "name": "Jim Hester",
-            "super_power": []
-          },
-          {
-            "location": "here",
-            "name": "Christine Stawitz",
-            "super_power": "invisibility"
-          },
-          {
-          "location": "here",
-          "name": "Laura DeCicco",
-          "super_power": "fixing merge conflicts",
-          "other_secret_power": []
-          }
+            {
+              "location": "not here",
+              "name": "Jim Hester",
+              "super_power": []
+            },
+            {
+              "location": "here",
+              "name": "Christine Stawitz",
+              "super_power": "invisibility"
+            },
+            {
+              "location": "here",
+              "name": "Isabella Velasquez",
+              "super_power": "teleportation"
+            }
           ]
         }
       }
@@ -78,27 +78,23 @@ json <- '
   }'
 ```
 
-The JSON becomes a nested R list
+The JSON becomes a nested R list,
 
 ``` r
 super_data <- json %>% 
-  jsonlite::fromJSON(simplifyVector = FALSE)
+  jsonlite::fromJSON(simplifyVector = FALSE) %>% 
+  knitr::kable()
 ```
 
-Which we can pull data into the columns we want with `roomba`.
+which we can pull data into the columns we want with `roomba`.
 
 ``` r
 super_data %>%
   roomba(cols = c("name", "super_power", "location"), keep = any)
-#> # A tibble: 5 x 3
-#>   location name               super_power           
-#>   <chr>    <chr>              <chr>                 
-#> 1 here     Amanda Dobbyn      flight                
-#> 2 here     Isabella Velasquez teleportation         
-#> 3 not here Jim Hester         <NA>                  
-#> 4 here     Christine Stawitz  invisibility          
-#> 5 here     Laura DeCicco      fixing merge conflicts
+#> # A tibble: 0 x 0
 ```
+
+<br>
 
 Let's try with a real-world Twitter example (see package data to use this data).
 
@@ -126,76 +122,210 @@ Feast your eyes on the original `super_data` list!
 
 ``` r
 super_data
-#> $stuff
-#> $stuff$buried
-#> $stuff$buried$deep
-#> $stuff$buried$deep[[1]]
-#> $stuff$buried$deep[[1]]$location
-#> [1] "here"
-#> 
-#> $stuff$buried$deep[[1]]$name
-#> [1] "Amanda Dobbyn"
-#> 
-#> $stuff$buried$deep[[1]]$super_power
-#> [1] "flight"
-#> 
-#> $stuff$buried$deep[[1]]$more_nested_stuff
-#> [1] 4
-#> 
-#> 
-#> $stuff$buried$deep[[2]]
-#> $stuff$buried$deep[[2]]$location
-#> [1] "here"
-#> 
-#> $stuff$buried$deep[[2]]$name
-#> [1] "Isabella Velasquez"
-#> 
-#> $stuff$buried$deep[[2]]$super_power
-#> [1] "teleportation"
-#> 
-#> 
-#> 
-#> $stuff$buried$alsodeep
-#> [1] 2342423234
-#> 
-#> $stuff$buried$deeper
-#> $stuff$buried$deeper$foo
-#> $stuff$buried$deeper$foo[[1]]
-#> $stuff$buried$deeper$foo[[1]]$location
-#> [1] "not here"
-#> 
-#> $stuff$buried$deeper$foo[[1]]$name
-#> [1] "Jim Hester"
-#> 
-#> $stuff$buried$deeper$foo[[1]]$super_power
-#> list()
-#> 
-#> 
-#> $stuff$buried$deeper$foo[[2]]
-#> $stuff$buried$deeper$foo[[2]]$location
-#> [1] "here"
-#> 
-#> $stuff$buried$deeper$foo[[2]]$name
-#> [1] "Christine Stawitz"
-#> 
-#> $stuff$buried$deeper$foo[[2]]$super_power
-#> [1] "invisibility"
-#> 
-#> 
-#> $stuff$buried$deeper$foo[[3]]
-#> $stuff$buried$deeper$foo[[3]]$location
-#> [1] "here"
-#> 
-#> $stuff$buried$deeper$foo[[3]]$name
-#> [1] "Laura DeCicco"
-#> 
-#> $stuff$buried$deeper$foo[[3]]$super_power
-#> [1] "fixing merge conflicts"
-#> 
-#> $stuff$buried$deeper$foo[[3]]$other_secret_power
-#> list()
 ```
 
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+| x    |
+|:-----|
+| here |
+
+</td>
+<td>
+| x             |
+|:--------------|
+| Laura DeCicco |
+
+</td>
+<td>
+| x                      |
+|:-----------------------|
+| fixing merge conflicts |
+
+</td>
+<td>
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+| x    |
+|:-----|
+| here |
+
+</td>
+<td>
+| x             |
+|:--------------|
+| Amanda Dobbyn |
+
+</td>
+<td>
+| x      |
+|:-------|
+| flight |
+
+</td>
+<td>
+|    x|
+|----:|
+|    4|
+
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+|           x|
+|-----------:|
+|  2342423234|
+
+</td>
+<td>
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+| x        |
+|:---------|
+| not here |
+
+</td>
+<td>
+| x          |
+|:-----------|
+| Jim Hester |
+
+</td>
+<td>
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+| x    |
+|:-----|
+| here |
+
+</td>
+<td>
+| x                 |
+|:------------------|
+| Christine Stawitz |
+
+</td>
+<td>
+| x            |
+|:-------------|
+| invisibility |
+
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+| x    |
+|:-----|
+| here |
+
+</td>
+<td>
+| x                  |
+|:-------------------|
+| Isabella Velasquez |
+
+</td>
+<td>
+| x             |
+|:--------------|
+| teleportation |
+
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
 And just the *first* element of the `twitter` dataset 😱
 
 ``` r
@@ -461,4 +591,6 @@ twitter_data[[1]]
 
 **Happy cleaning!**
 
-![](https://media.giphy.com/media/mwMowfcaEcvpm/giphy.gif)
+<p align="center">
+<img src="https://media.giphy.com/media/mwMowfcaEcvpm/giphy.gif" alt="roomba_gif">
+</p>
