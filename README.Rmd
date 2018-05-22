@@ -60,13 +60,13 @@ toy_data <- jsonlite::fromJSON('
         {
           "goodstuff": "here",
           "name": "Bob Rudis",
-          "secret_power": 5,
+          "secret_power": [5],
           "other_secret_power": []
         },
         {
           "goodstuff": "here",
           "name": "Amanda Dobbyn",
-          "secret_power": 4, 
+          "secret_power": [4], 
           "more_nested_stuff": 4
         }
         ],
