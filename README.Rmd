@@ -41,16 +41,6 @@ devtools::install_github("ropenscilabs/roomba")
 
 ## Example
 
-```{r, echo=FALSE}
-replace_null <- function(x, replacement = NA) {
-  empty_idx <- dfs_idx(x, ~ length(.x) == 0 || is.na(.x))
-  for (i in empty_idx) {
-    x[[i]] <- replacement
-  }
-  x
-}
-```
-
 Say we have some JSON from a pesky API.
 
 ```{r example}
@@ -62,15 +52,15 @@ json <- '
       "buried": {
         "deep": [
         {
-          "goodstuff": "here",
+          "location": "here",
           "name": "Bob Rudis",
-          "secret_power": 5,
+          "super_power": "invisibility",
           "other_secret_power": []
         },
         {
-          "goodstuff": "here",
+          "location": "here",
           "name": "Amanda Dobbyn",
-          "secret_power": 4, 
+          "secret_power": "flight",
           "more_nested_stuff": 4
         }
         ],
@@ -78,33 +68,55 @@ json <- '
         "deeper": {
           "foo": [
           {
-            "goodstuff": "not here",
-            "name": "barb",
+            "location": "not here",
+            "name": "Jim Hester",
             "secret_power": []
           },
           {
-             "goodstuff": "here",    // More deeply nested "goodstuff" than "goodstuff"s above
-             "name": "borris"
+            "location": "here",
+            "name": "Isabella Velasquez",
+            "secret_power": "shape-shifting"
+          },
+          {
+            "location": "here",
+            "name": "Christine Stawitz",
+            "secret_power": "shape-shifting"
+          },
+          {
+             "location": "here",
+             "name": "Borris"
           }
-            ]
+          ]
         }
       }
     }
   }'
 ```
 
-
 The JSON becomes a nested R list
 
 ```{r}
-super_data <- jsonlite::fromJSON(json, simplifyVector = FALSE)
+super_data <- json %>% 
+  jsonlite::fromJSON(simplifyVector = FALSE)
 ```
 
-which we can pull data into the columns we want with `roomba`.
+Which we can pull data into the columns we want with `roomba`.
 
 ```{r}
-super_data %>% 
-  roomba(cols = c("name", "secret_power", "goodstuff"), .keep = any)
+super_data %>%
+  roomba(cols = c("name", "secret_power", "location"), keep = any)
+```
+
+
+Let's try with a real-world Twitter example.
+
+```{r}
+twitter_data[[1]]
+```
+
+
+```{r}
+roomba(twitter_data, c("created_at", "name"))
 ```
 
 
