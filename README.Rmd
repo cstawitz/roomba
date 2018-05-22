@@ -14,6 +14,7 @@ knitr::opts_chunk$set(
 # roomba
 [![Travis build status](https://travis-ci.com/ropenscilabs/roomba.svg?branch=master)](https://travis-ci.com/ropenscilabs/roomba)
 
+
 This is a package to transform large, multi-nested lists into a more
 user-friendly format (i.e. a `tibble`) in `R`. The initial focus is on making
 processing of return values from `jsonlite::fromJSON()` queries more seamless,
@@ -46,6 +47,10 @@ You can install the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("ropenscilabs/roomba")
 ```
+
+<p align="center">
+  <img src="./img/sticker.png" alt="roomba_gif" height="200px">
+</p>
 
 Say we have some JSON from a pesky API.
 

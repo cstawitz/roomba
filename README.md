@@ -30,6 +30,9 @@ You can install the development version from [GitHub](https://github.com/) with:
 devtools::install_github("ropenscilabs/roomba")
 ```
 
+<p align="center">
+<img src="./img/sticker.png" alt="roomba_gif" height="200px">
+</p>
 Say we have some JSON from a pesky API.
 
 ``` r
