@@ -4,19 +4,16 @@
 \alias{roomba}
 \title{Roomba}
 \usage{
-roomba(inp, clean = TRUE, replacement = NA_character_, rows = NULL,
-  cols = NULL)
+roomba(inp, replacement = NA, cols = NULL, keep = all)
 }
 \arguments{
-\item{inp}{Element to replace}
-
-\item{clean}{Should NULL values be changed to NAs?}
+\item{inp}{input list}
 
 \item{replacement}{Replacement for NULL values. Defaults to NA_character_.}
 
-\item{rows}{id to label rows}
+\item{cols}{column names to extract}
 
-\item{cols}{columns to include}
+\item{keep}{Select \code{all} or \code{any} columns.}
 }
 \description{
 Tidy your nested list
