@@ -27,20 +27,20 @@ roomba <- function(inp, replacement = NA,
     replace_null()
   # -- Message that NULLs were replaced with NAs?
 
-  has_good_stuff <- function(x, y) {
-    if (length(x[[y]]) > 0) {
-      return(x[[y]])
+
+  has_good_stuff <- function(data, cols) {
+    if (do_an = "and") {
+      all(map_lgl(cols, ~ length(data[[.x]]) > 0))
+    } else if (do_an = "or") {
+      any(map_lgl(cols, ~ length(data[[.x]]) > 0))
     }
   }
 
-  filter_cols <- function(x, y) {
-    out <- map2(x, y, has_good_stuff)
-    return(out)
-  }
+  inp_filtered <-
+    dfs_idx(inp_clean, ~ has_good_stuff(data = .x, cols = cols))
 
-  inp_filtered <- inp_clean %>%
-    dfs_idx(~ length(.x[[cols[1]]]) > 0)
-    # dfs_idx(~ has_good_stuff(.x, cols[1]))
+  inp_selected <- inp_filtered %>%
+   inp_filtered
 
   out <- inp_filtered %>%
     purrr:::map_dfr(~ inp[[.x]])
@@ -54,6 +54,7 @@ roomba <- function(inp, replacement = NA,
 }
 
 roomba(y, cols = c("name", "secret_power"))
+
 
 
 roomba(y, cols = name)
