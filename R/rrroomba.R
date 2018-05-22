@@ -1,7 +1,6 @@
 #' Roomba
 #'
 #' @description Tidy your nested list
-#' @param x Element to replace
 #' @param replacement Replacement for NULL values. Defaults to NA_character_.
 #' @param inp Element to replace
 #' @param replacement Replacement for NULL values. Defaults to NA_character_.
@@ -23,7 +22,6 @@ roomba <- function(inp, replacement = NA,
 
   assertthat::assert_that(!is.null(cols),
                           msg = "cols must be non-NULL.")
-
 
   inp_clean <- inp %>%
     replace_null()

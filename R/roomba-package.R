@@ -15,11 +15,17 @@ NULL
 #'
 #' Example data from Twitter API
 #'
-#' @name twitter_data
-#' @rdname example_data
-#' @docType data
-#' @keywords twitter data
-#' @examples
 #' twitter_data[[1]][["id"]]
-NULL
+#' @source <https://developer.twitter.com/en/docs>
+"twitter_data"
 
+#' Example data from reddit
+#' @source <https://www.reddit.com/dev/api/>
+"reddit"
+
+#' Example data from vimeo
+#' @source <https://developer.vimeo.com/>
+"vimeo"
+
+#' Example data with simple nested list
+"simple"
