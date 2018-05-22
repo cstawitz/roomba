@@ -1,4 +1,6 @@
+require(shiny)
 ui <- fluidPage(
+
     titlePanel("rrroomba"),
     sidebarLayout(
       sidebarPanel(
@@ -12,8 +14,7 @@ ui <- fluidPage(
         
            #conditionalPanel(condition="length(input.data)>0",
             #fluidRow(column(4,verbatimTextOutput("names")))
-          )),
-      mainPanel(
-       
-      )
+          ),
+      mainPanel()
+    )
     )
