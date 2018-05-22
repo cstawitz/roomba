@@ -2,7 +2,7 @@
 # roomba
 
 [![Travis build
-status](https://travis-ci.org/ropenscilabs/roomba.svg?branch=master)](https://travis-ci.org/ropenscilabs/roomba)
+status](https://travis-ci.com/ropenscilabs/roomba.svg?branch=master)](https://travis-ci.com/ropenscilabs/roomba)
 
 This is a package to transform large, multi-nested lists into a more
 user-friendly format (i.e. a `tibble`) in `R`. The initial focus is on
