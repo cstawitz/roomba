@@ -1,4 +1,6 @@
 require(shiny)
+require(roomba)
+require(purrr)
 ui <- fluidPage(
 
     titlePanel("rrroomba"),
@@ -17,4 +19,4 @@ ui <- fluidPage(
           ),
       mainPanel()
     )
-    )
+)
