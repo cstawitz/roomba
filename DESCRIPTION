@@ -1,11 +1,19 @@
 Type: Package
 Package: roomba
-Title: What the Package Does (Title Case)
+Title: Tidy up nested list hairballs
+Authors@R: c(
+    person("Jim", "Hester", email = "james.f.hester@gmail.com", role = c("aut", "cre")),
+    person("Amanda", "Dobbyn", role = "aut"),
+    person("Christine", "Stawitz", role = "aut"),
+    person("Laura", "DeCicco", role = "aut"),
+    person("Isabella", "Velasquez", role = "aut")
+    )
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: This is a package to transform large, multi-nested lists into a more
+  user-friendly format. The initial focus is on making
+  processing of return values from `jsonlite::fromJSON()` queries more seamless,
+  but ideally this package should be useful for deeply-nested lists from an array
+  of sources.
 License: MIT + file LICENSE
 Depends:
     R (>= 3.0)
