@@ -1,5 +1,6 @@
-replace_null <- function(x, replacement = NA_character_) {
-  empty_idx <- dfs_idx(x, ~ length(.x) == 0)
+
+replace_null <- function(x, replacement = NA) {
+  empty_idx <- dfs_idx(x, ~ length(.x) == 0 || is.na(.x))
   for (i in empty_idx) {
     x[[i]] <- replacement
   }
@@ -18,3 +19,11 @@ replace_single_null <- function(e, replacement = NA_character_) {
 
 #' vec <- list(c("a", "b"), x = NULL)
 #' purrr::map(vec, replace_null, replacement = "foo")
+
+
+
+has_good_stuff <- function(x, y) {
+  if (length(x[[y]]) > 0) {
+    return(x[[y]])
+  }
+}

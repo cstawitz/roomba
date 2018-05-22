@@ -11,6 +11,7 @@ knitr::opts_chunk$set(
 )
 ```
 # roomba
+[![Travis build status](https://travis-ci.com/ropenscilabs/roomba.svg?branch=master)](https://travis-ci.com/ropenscilabs/roomba)
 
 This is a package to transform large, multi-nested lists into a more
 user-friendly format (i.e. a `tibble`) in `R`. The initial focus is on making
@@ -59,13 +60,13 @@ toy_data <- jsonlite::fromJSON('
         {
           "goodstuff": "here",
           "name": "Bob Rudis",
-          "secret_power": 5,
+          "secret_power": [5],
           "other_secret_power": []
         },
         {
           "goodstuff": "here",
           "name": "Amanda Dobbyn",
-          "secret_power": 4, 
+          "secret_power": [4], 
           "more_nested_stuff": 4
         }
         ],
@@ -94,4 +95,9 @@ y
 
 y %>% dfs_idx(~ .x$goodstuff == "here") %>%
   purrr:::map_dfr(~ y[[.x]])
+
+y %>% 
+  dfs_idx(~ length(.x[["name"]]) > 0 && length(.x[["secret_power"]]) > 0) %>% 
+  purrr:::map_dfr(~ y[[.x]]) %>% 
+  dplyr::select(secret_power, name)
 ```
