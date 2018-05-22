@@ -16,12 +16,14 @@
 
 
 roomba <- function(inp, replacement = NA,
-                   cols = NULL) {
+                   cols = NULL, .keep = all) {
   assertthat::assert_that(length(inp) > 0,
                           msg = "Input is of length 0.")
 
   assertthat::assert_that(!is.null(cols),
                           msg = "cols must be non-NULL.")
+
+  .keep <- match.fun(.keep)
 
   inp_clean <- inp %>%
     replace_null()
@@ -29,35 +31,26 @@ roomba <- function(inp, replacement = NA,
 
 
   has_good_stuff <- function(data, cols) {
-    if (do_an = "and") {
-      all(map_lgl(cols, ~ length(data[[.x]]) > 0))
-    } else if (do_an = "or") {
-      any(map_lgl(cols, ~ length(data[[.x]]) > 0))
-    }
+    .keep(map_lgl(cols, ~ length(data[[.x]]) > 0))
   }
 
   inp_filtered <-
     dfs_idx(inp_clean, ~ has_good_stuff(data = .x, cols = cols))
 
-  inp_selected <- inp_filtered %>%
-   inp_filtered
-
   out <- inp_filtered %>%
-    purrr:::map_dfr(~ inp[[.x]])
-
-  out <- out[, which(names(out) %in% cols)]
-
-  # %>%
-  #   select(!!!q_cols)
+    purrr:::map_dfr(
+      function(.x) {
+        res <- inp[[.x]]
+        res[names(res) %in% cols]
+      })
 
   return(out)
 }
 
-roomba(y, cols = c("name", "secret_power"))
+roomba(y, cols = c("name", "secret_power"), .keep = any)
 
+roomba(y, cols = c("name", "secret_power", "goodstuff"), .keep = all)
 
-
-roomba(y, cols = name)
 
 
 
