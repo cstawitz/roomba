@@ -54,8 +54,8 @@ json <- '
           }
         ],
         "alsodeep": 2342423234,
-        "deeper": {
-          "foo": [
+        "stilldeep": {
+          "even_deeper": [
             {
               "location": "not here",
               "name": "Jim Hester",
@@ -64,7 +64,8 @@ json <- '
             {
               "location": "here",
               "name": "Christine Stawitz",
-              "super_power": "invisibility"
+              "super_power": "invisibility",
+              "more_nested_stuff": 5
             },
             {
               "location": "here",
@@ -89,15 +90,15 @@ which we can pull data into the columns we want with `roomba`.
 
 ``` r
 super_data %>%
-  roomba(cols = c("name", "super_power", "location"), keep = any)
-#> # A tibble: 5 x 3
-#>   location name               super_power           
-#>   <chr>    <chr>              <chr>                 
-#> 1 here     Laura DeCicco      fixing merge conflicts
-#> 2 here     Amanda Dobbyn      flight                
-#> 3 not here Jim Hester         <NA>                  
-#> 4 here     Christine Stawitz  invisibility          
-#> 5 here     Isabella Velasquez teleportation
+  roomba(cols = c("name", "super_power", "location", "more_nested_stuff"), keep = any)
+#> # A tibble: 5 x 4
+#>   location name               super_power            more_nested_stuff
+#>   <chr>    <chr>              <chr>                              <int>
+#> 1 here     Laura DeCicco      fixing merge conflicts                NA
+#> 2 here     Amanda Dobbyn      flight                                 4
+#> 3 not here Jim Hester         <NA>                                  NA
+#> 4 here     Christine Stawitz  invisibility                           5
+#> 5 here     Isabella Velasquez teleportation                         NA
 ```
 
 <br>
@@ -110,7 +111,7 @@ roomba(twitter_data, c("created_at", "name"))
 #>    name                 created_at                    
 #>    <chr>                <chr>                         
 #>  1 Code for America     Mon Aug 10 18:59:29 +0000 2009
-#>  2 Ben Lorica <U+7F57><U+745E><U+5361>    Mon Dec 22 22:06:18 +0000 2008
+#>  2 Ben Lorica 罗瑞卡    Mon Dec 22 22:06:18 +0000 2008
 #>  3 Dan Sholler          Thu Apr 03 20:09:24 +0000 2014
 #>  4 Code for America     Mon Aug 10 18:59:29 +0000 2009
 #>  5 FiveThirtyEight      Tue Jan 21 21:39:32 +0000 2014
@@ -128,6 +129,8 @@ Shiny app included!
 <p align="center">
 <img src="images/shinydemo.gif" alt="roomba_gif">
 </p>
+<br>
+
 What did that original data look like???
 ========================================
 
@@ -170,38 +173,41 @@ super_data
 #> $stuff$buried$alsodeep
 #> [1] 2342423234
 #> 
-#> $stuff$buried$deeper
-#> $stuff$buried$deeper$foo
-#> $stuff$buried$deeper$foo[[1]]
-#> $stuff$buried$deeper$foo[[1]]$location
+#> $stuff$buried$stilldeep
+#> $stuff$buried$stilldeep$even_deeper
+#> $stuff$buried$stilldeep$even_deeper[[1]]
+#> $stuff$buried$stilldeep$even_deeper[[1]]$location
 #> [1] "not here"
 #> 
-#> $stuff$buried$deeper$foo[[1]]$name
+#> $stuff$buried$stilldeep$even_deeper[[1]]$name
 #> [1] "Jim Hester"
 #> 
-#> $stuff$buried$deeper$foo[[1]]$super_power
+#> $stuff$buried$stilldeep$even_deeper[[1]]$super_power
 #> list()
 #> 
 #> 
-#> $stuff$buried$deeper$foo[[2]]
-#> $stuff$buried$deeper$foo[[2]]$location
+#> $stuff$buried$stilldeep$even_deeper[[2]]
+#> $stuff$buried$stilldeep$even_deeper[[2]]$location
 #> [1] "here"
 #> 
-#> $stuff$buried$deeper$foo[[2]]$name
+#> $stuff$buried$stilldeep$even_deeper[[2]]$name
 #> [1] "Christine Stawitz"
 #> 
-#> $stuff$buried$deeper$foo[[2]]$super_power
+#> $stuff$buried$stilldeep$even_deeper[[2]]$super_power
 #> [1] "invisibility"
 #> 
+#> $stuff$buried$stilldeep$even_deeper[[2]]$more_nested_stuff
+#> [1] 5
 #> 
-#> $stuff$buried$deeper$foo[[3]]
-#> $stuff$buried$deeper$foo[[3]]$location
+#> 
+#> $stuff$buried$stilldeep$even_deeper[[3]]
+#> $stuff$buried$stilldeep$even_deeper[[3]]$location
 #> [1] "here"
 #> 
-#> $stuff$buried$deeper$foo[[3]]$name
+#> $stuff$buried$stilldeep$even_deeper[[3]]$name
 #> [1] "Isabella Velasquez"
 #> 
-#> $stuff$buried$deeper$foo[[3]]$super_power
+#> $stuff$buried$stilldeep$even_deeper[[3]]$super_power
 #> [1] "teleportation"
 ```
 

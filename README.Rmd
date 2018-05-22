@@ -71,8 +71,8 @@ json <- '
           }
         ],
         "alsodeep": 2342423234,
-        "deeper": {
-          "foo": [
+        "stilldeep": {
+          "even_deeper": [
             {
               "location": "not here",
               "name": "Jim Hester",
@@ -81,7 +81,8 @@ json <- '
             {
               "location": "here",
               "name": "Christine Stawitz",
-              "super_power": "invisibility"
+              "super_power": "invisibility",
+              "more_nested_stuff": 5
             },
             {
               "location": "here",
@@ -106,7 +107,7 @@ which we can pull data into the columns we want with `roomba`.
 
 ```{r}
 super_data %>%
-  roomba(cols = c("name", "super_power", "location"), keep = any)
+  roomba(cols = c("name", "super_power", "location", "more_nested_stuff"), keep = any)
 ```
 
 
@@ -125,6 +126,7 @@ roomba(twitter_data, c("created_at", "name"))
   <img src="images/shinydemo.gif" alt="roomba_gif">
 </p>
 
+<br>
 
 # What did that original data look like???
 
