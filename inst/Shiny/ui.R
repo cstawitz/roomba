@@ -3,24 +3,20 @@ require(roomba)
 require(purrr)
 ui <- fluidPage(
 
-    titlePanel("rrroomba"),
+    titlePanel("roomba"),
     sidebarLayout(
       sidebarPanel(
-        
+        p("An R package that allows for easy parsing of nested lists."),
         # Input: Slider to select JSON file ----
         fileInput(inputId = "data",
-                  label = "Select a JSON or Rda file to import:",
+                  label = "Select a data file to import:",
                   accept = c('.json', '.rda'), multiple=FALSE),
         
         # Output: Names of first level list objects----
-        
-           conditionalPanel(condition="length(input.data)>0",
-            fluidRow(column(4,verbatimTextOutput("names")))),
-           conditionalPanel(condition="length(output.varSet)>0",
-                            uiOutput("varSet"), 
-                            actionButton("makePlot", "Plot"))
+                  actionButton("makePlot", "Plot"),
+                  checkboxGroupInput("Variables", "Select variables to plot:")
+                            
           ),
-          mainPanel(conditionalPanel(condition="length(output.varSet)>0",
-                                 plotOutput("plot")))
+          mainPanel(plotOutput("plot"))
     )
 )

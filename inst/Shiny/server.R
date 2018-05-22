@@ -1,5 +1,5 @@
 # Define server logic required to draw a histogram ----
-server <- function(input, output) {
+server <- function(input, output, session) {
   require(jsonlite)
   require(tools)
   library(roomba)
@@ -18,10 +18,13 @@ server <- function(input, output) {
   })
   
   #Print names of first level list items
-  output$varSet <- renderUI({
+  observe({
+    if(!is.null(input$data)){
     dataset <- datasetInput()
     column.names <- roomba::list_names(dataset)
-    checkboxGroupInput("Variables","Choose variables", column.names) 
+    updateCheckboxGroupInput(session, "Variables", 
+                             choices=sort(column.names))
+    }
   })
   
   output$plot <- eventReactive(input$makePlot, 
@@ -32,6 +35,9 @@ server <- function(input, output) {
                       as.POSIXct(thedata$created_at, format="%a %b %d %H:%M:%S %z %Y")
                     
                     output$plot <- renderPlot(
-                       ggplot(thedata) + geom_point(aes(x=name, y=created_at))
+                       ggplot(thedata) + 
+                         geom_point(aes(x=name, y=created_at)) +
+                                      theme(axis.text.x = element_text(angle = 90, hjust = 1),
+                                            text = element_text(size=16))
                       )})
 }

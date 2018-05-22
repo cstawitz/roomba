@@ -27,29 +27,25 @@ of sources.
 </p>
 
 
-
 *Key features:*
 
 
-* `roomba()` searches deeply-nested list for names specified in
-  `cols` (a character vector) and returns a `tibble` with the
-  associated column titles. Nothing further about nesting hierarchy or
-  depth need be specified.
-* Handles empty values gracefully by substituting `NULL` values with 
- `NA` or user-specified value in `default`, or truncates lists appropriately. 
-   * If you're only interested in sniffing out and replacing all `NULL`s, turn to the `replace_null()` function.
- * Option to `keep` `any` or `all` data from the columns supplied
+* `roomba()` searches deeply-nested list for names specified in `cols` (a character vector) and returns a `tibble` with the associated column titles. Nothing further about nesting hierarchy or depth need be specified.
+
+* Handles empty values gracefully by substituting `NULL` values with  `NA` or user-specified value in `default`, or truncates lists appropriately. 
+
+* If you're only interested in sniffing out and replacing all `NULL`s, turn to the `replace_null()` function.
+
+* Option to `keep` `any` or `all` data from the columns supplied
 
 ## Installation
 
 You can install the development version from [GitHub](https://github.com/) with:
 
-```{r}
+```{r, eval=FALSE}
 # install.packages("devtools")
 devtools::install_github("ropenscilabs/roomba")
 ```
-
-## Example
 
 Say we have some JSON from a pesky API.
 
@@ -75,8 +71,8 @@ json <- '
           }
         ],
         "alsodeep": 2342423234,
-        "deeper": {
-          "foo": [
+        "stilldeep": {
+          "even_deeper": [
             {
               "location": "not here",
               "name": "Jim Hester",
@@ -85,7 +81,8 @@ json <- '
             {
               "location": "here",
               "name": "Christine Stawitz",
-              "super_power": "invisibility"
+              "super_power": "invisibility",
+              "more_nested_stuff": 5
             },
             {
               "location": "here",
@@ -110,7 +107,7 @@ which we can pull data into the columns we want with `roomba`.
 
 ```{r}
 super_data %>%
-  roomba(cols = c("name", "super_power", "location"), keep = any)
+  roomba(cols = c("name", "super_power", "location", "more_nested_stuff"), keep = any)
 ```
 
 
@@ -123,8 +120,15 @@ Let's try with a real-world Twitter example (see package data to use this data).
 roomba(twitter_data, c("created_at", "name"))
 ```
 
+# Shiny app included!
 
-***
+<p align="center">
+  <img src="images/shinydemo.gif" alt="roomba_gif">
+</p>
+
+<br>
+
+# What did that original data look like???
 
 Feast your eyes on the original `super_data` list!
 
