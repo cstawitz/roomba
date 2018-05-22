@@ -6,11 +6,11 @@ ui <- fluidPage(
         # Input: Slider to select JSON file ----
         fileInput(inputId = "data",
                   label = "Select a JSON file to import:",
-                  accept = c('.json', '.rda')),
+                  accept = c('.json', '.rda'), multiple=FALSE),
         
         # Output: Names of first level list objects----
         
-           conditionalPanel(condition="length(input.file1)>0",
+           conditionalPanel(condition="is.null(input.file1)",
             fluidRow(column(4,verbatimTextOutput("names")))
           )),
       mainPanel(
@@ -22,14 +22,13 @@ ui <- fluidPage(
 
 # Define server logic required to draw a histogram ----
 server <- function(input, output) {
-  
+  require(jsonlite)
   # Allow data to change as input changes
   
   datasetInput <- reactive({
-    input$data
+    jsonlite::fromJSON(input$data$datapath)
            
   })
-  
   #Print names of first level list items
   output$names <- renderPrint({
     dataset <- datasetInput()
