@@ -11,7 +11,7 @@
 #' @examples
 #'
 #' simple %>% roomba(cols = c("name", "goodstuff"), keep = any)
-#' simple %>% roomba(cols = c("name", "goodstuff", ""), keep = any)
+#' simple %>% roomba(cols = c("name", "goodstuff"), keep = any)
 roomba <- function(inp, cols = NULL, default = NA,
                     keep = all) {
 

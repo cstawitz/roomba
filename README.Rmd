@@ -20,6 +20,13 @@ processing of return values from `jsonlite::fromJSON()` queries more seamless,
 but ideally this package should be useful for deeply-nested lists from an array
 of sources.
 
+<!-- ![roomba_gif](https://media.giphy.com/media/mwMowfcaEcvpm/giphy.gif) -->
+
+<p align="center">
+  <img src="https://media.giphy.com/media/mP9hvHDhy4E9i/giphy.gif" alt="roomba_gif">
+</p>
+
+
 *Key features:*
 
 * `roomba()` searches deeply-nested list for names specified in
@@ -27,8 +34,8 @@ of sources.
   associated column titles. Nothing further about nesting hierarchy or
   depth need be specified.
 * Handles empty values gracefully by substituting `NULL` values with 
- `NA` or user-specified value in `.default`, or truncates lists appropriately. 
- * Option to `.keep` `any` or `all` data from the columns supplied
+ `NA` or user-specified value in `default`, or truncates lists appropriately. 
+ * Option to `keep` `any` or `all` data from the columns supplied
 
 ## Installation
 
@@ -49,11 +56,45 @@ replace_null <- function(x, replacement = NA) {
   }
   x
 }
+
+
+roomba <- function(inp, cols = NULL, default = NA,
+                    keep = all) {
+
+  assertthat::assert_that(length(inp) > 0,
+                          msg = "Input is of length 0.")
+
+  assertthat::assert_that(!is.null(cols),
+                          msg = "cols must be non-NULL.")
+
+  keep <- match.fun(keep)
+
+  inp_clean <- inp %>%
+    replace_null(replacement = default)
+  # -- Message that NULLs were replaced with NAs?
+
+  has_good_stuff <- function(data, cols) {
+    keep(purrr::map_lgl(cols, ~ length(data[[.x]]) > 0))
+  }
+
+  indices <-
+    dfs_idx(inp_clean, ~ has_good_stuff(data = .x, cols = cols))
+
+  out <- indices %>% purrr::map(
+    function(.x) {
+      res <- inp[[.x]]
+      res[names(res) %in% cols]
+    }) %>% replace_null() %>%
+  dplyr::bind_rows()
+
+  return(out)
+}
 ```
+
 
 Say we have some JSON from a pesky API.
 
-```{r example}
+```{r example, message=FALSE}
 library(roomba)
 
 json <- '
@@ -63,15 +104,14 @@ json <- '
         "deep": [
         {
           "location": "here",
-          "name": "Bob Rudis",
-          "super_power": "invisibility",
-          "other_secret_power": []
+          "name": "Amanda Dobbyn",
+          "super_power": "flight",
+          "more_nested_stuff": 4
         },
         {
           "location": "here",
-          "name": "Amanda Dobbyn",
-          "secret_power": "flight",
-          "more_nested_stuff": 4
+          "name": "Isabella Velasquez",
+          "super_power": "teleportation"
         }
         ],
         "alsodeep": 2342423234,
@@ -80,11 +120,18 @@ json <- '
           {
             "location": "not here",
             "name": "Jim Hester",
-            "secret_power": []
+            "super_power": []
           },
           {
-             "location": "here",
-             "name": "Borris"
+            "location": "here",
+            "name": "Christine Stawitz",
+            "super_power": "invisibility"
+          },
+          {
+          "location": "here",
+          "name": "Laura DeCicco",
+          "super_power": "fixing merge conflicts",
+          "other_secret_power": []
           }
           ]
         }
@@ -96,12 +143,43 @@ json <- '
 The JSON becomes a nested R list
 
 ```{r}
-super_data <- jsonlite::fromJSON(json, simplifyVector = FALSE)
+super_data <- json %>% 
+  jsonlite::fromJSON(simplifyVector = FALSE)
 ```
 
 Which we can pull data into the columns we want with `roomba`.
 
 ```{r}
 super_data %>%
-  roomba(cols = c("name", "secret_power", "location"), keep = any)
+  roomba(cols = c("name", "super_power", "location"), keep = any)
 ```
+
+
+Let's try with a real-world Twitter example (see package data to use this data).
+
+
+```{r}
+roomba(twitter_data, c("created_at", "name"))
+```
+
+
+***
+
+Feast your eyes on the original `super_data` list!
+
+```{r}
+super_data
+```
+
+And just the *first* element of the `twitter` dataset `r emo::ji("scream")`
+
+```{r}
+twitter_data[[1]]
+```
+
+
+<br>
+
+**Happy cleaning!**
+
+![](https://media.giphy.com/media/mwMowfcaEcvpm/giphy.gif)
