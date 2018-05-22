@@ -4,10 +4,7 @@
 \alias{list_names}
 \title{List all names in a list}
 \usage{
-list_names(x)
-}
-\arguments{
-\item{x}{Input list}
+list_names(x, replacement = NA)
 }
 \description{
 List all names in a list
