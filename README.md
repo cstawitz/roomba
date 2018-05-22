@@ -40,37 +40,37 @@ json <- '
     "stuff": {
       "buried": {
         "deep": [
-        {
-          "location": "here",
-          "name": "Amanda Dobbyn",
-          "super_power": "flight",
-          "more_nested_stuff": 4
-        },
-        {
-          "location": "here",
-          "name": "Isabella Velasquez",
-          "super_power": "teleportation"
-        }
+          {
+            "location": "here",
+            "name": "Laura DeCicco",
+            "super_power": "fixing merge conflicts",
+            "other_secret_power": []
+          },
+          {
+            "location": "here",
+            "name": "Amanda Dobbyn",
+            "super_power": "flight",
+            "more_nested_stuff": 4
+          }
         ],
         "alsodeep": 2342423234,
         "deeper": {
           "foo": [
-          {
-            "location": "not here",
-            "name": "Jim Hester",
-            "super_power": []
-          },
-          {
-            "location": "here",
-            "name": "Christine Stawitz",
-            "super_power": "invisibility"
-          },
-          {
-          "location": "here",
-          "name": "Laura DeCicco",
-          "super_power": "fixing merge conflicts",
-          "other_secret_power": []
-          }
+            {
+              "location": "not here",
+              "name": "Jim Hester",
+              "super_power": []
+            },
+            {
+              "location": "here",
+              "name": "Christine Stawitz",
+              "super_power": "invisibility"
+            },
+            {
+              "location": "here",
+              "name": "Isabella Velasquez",
+              "super_power": "teleportation"
+            }
           ]
         }
       }
@@ -78,14 +78,14 @@ json <- '
   }'
 ```
 
-The JSON becomes a nested R list
+The JSON becomes a nested R list,
 
 ``` r
 super_data <- json %>% 
-  jsonlite::fromJSON(simplifyVector = FALSE)
+  jsonlite::fromJSON(simplifyVector = FALSE) 
 ```
 
-Which we can pull data into the columns we want with `roomba`.
+which we can pull data into the columns we want with `roomba`.
 
 ``` r
 super_data %>%
@@ -93,12 +93,14 @@ super_data %>%
 #> # A tibble: 5 x 3
 #>   location name               super_power           
 #>   <chr>    <chr>              <chr>                 
-#> 1 here     Amanda Dobbyn      flight                
-#> 2 here     Isabella Velasquez teleportation         
+#> 1 here     Laura DeCicco      fixing merge conflicts
+#> 2 here     Amanda Dobbyn      flight                
 #> 3 not here Jim Hester         <NA>                  
 #> 4 here     Christine Stawitz  invisibility          
-#> 5 here     Laura DeCicco      fixing merge conflicts
+#> 5 here     Isabella Velasquez teleportation
 ```
+
+<br>
 
 Let's try with a real-world Twitter example (see package data to use this data).
 
@@ -134,13 +136,13 @@ super_data
 #> [1] "here"
 #> 
 #> $stuff$buried$deep[[1]]$name
-#> [1] "Amanda Dobbyn"
+#> [1] "Laura DeCicco"
 #> 
 #> $stuff$buried$deep[[1]]$super_power
-#> [1] "flight"
+#> [1] "fixing merge conflicts"
 #> 
-#> $stuff$buried$deep[[1]]$more_nested_stuff
-#> [1] 4
+#> $stuff$buried$deep[[1]]$other_secret_power
+#> list()
 #> 
 #> 
 #> $stuff$buried$deep[[2]]
@@ -148,10 +150,13 @@ super_data
 #> [1] "here"
 #> 
 #> $stuff$buried$deep[[2]]$name
-#> [1] "Isabella Velasquez"
+#> [1] "Amanda Dobbyn"
 #> 
 #> $stuff$buried$deep[[2]]$super_power
-#> [1] "teleportation"
+#> [1] "flight"
+#> 
+#> $stuff$buried$deep[[2]]$more_nested_stuff
+#> [1] 4
 #> 
 #> 
 #> 
@@ -187,13 +192,10 @@ super_data
 #> [1] "here"
 #> 
 #> $stuff$buried$deeper$foo[[3]]$name
-#> [1] "Laura DeCicco"
+#> [1] "Isabella Velasquez"
 #> 
 #> $stuff$buried$deeper$foo[[3]]$super_power
-#> [1] "fixing merge conflicts"
-#> 
-#> $stuff$buried$deeper$foo[[3]]$other_secret_power
-#> list()
+#> [1] "teleportation"
 ```
 
 And just the *first* element of the `twitter` dataset 😱
@@ -461,4 +463,6 @@ twitter_data[[1]]
 
 **Happy cleaning!**
 
-![](https://media.giphy.com/media/mwMowfcaEcvpm/giphy.gif)
+<p align="center">
+<img src="https://media.giphy.com/media/mwMowfcaEcvpm/giphy.gif" alt="roomba_gif">
+</p>
