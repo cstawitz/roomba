@@ -45,8 +45,11 @@ data("twitter_data")
 ```{r}
 twitter_data <- twitter_data
 
-twitter_data %>% roomba(cols = c("followers_count", "friends_count")) %>% 
+p <-
+  twitter_data %>% roomba(cols = c("followers_count", "friends_count")) %>% 
   ggplot(aes(x = followers_count, y = friends_count)) +
   geom_point() + 
   theme_minimal()
+
+p
 ```
