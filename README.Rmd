@@ -11,6 +11,7 @@ knitr::opts_chunk$set(
 )
 ```
 # roomba
+[![Travis build status](https://travis-ci.com/ropenscilabs/roomba.svg?branch=master)](https://travis-ci.com/ropenscilabs/roomba)
 
 This is a package to transform large, multi-nested lists into a more
 user-friendly format (i.e. a `tibble`) in `R`. The initial focus is on making
@@ -36,6 +37,17 @@ You can install the development version from [GitHub](https://github.com/) with:
 devtools::install_github("ropenscilabs/roomba")
 ```
 ## Example
+
+```{r, echo=FALSE}
+replace_null <- function(x, replacement = NA_character_) {
+  empty_idx <- dfs_idx(x, ~ length(.x) == 0)
+  for (i in empty_idx) {
+    x[[i]] <- replacement
+  }
+  x
+}
+```
+
 
 ```{r example}
 library(roomba)
@@ -65,6 +77,10 @@ toy_data <- jsonlite::fromJSON('
             "goodstuff": 5,
             "name": "barb",
             "secret_power": []
+          },
+          {
+             "goodstuff": "here",
+             "name": "borris"
           }
             ]
         }
