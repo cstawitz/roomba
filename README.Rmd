@@ -119,7 +119,14 @@ Let's try with a real-world Twitter example (see package data to use this data).
 roomba(twitter_data, c("created_at", "name"))
 ```
 
+# Shiny app included!
 
+<p align="center">
+  <img src="images/shinydemo.gif" alt="roomba_gif">
+</p>
+
+
+# What did that original data look like???
 
 Feast your eyes on the original `super_data` list!
 

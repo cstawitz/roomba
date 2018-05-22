@@ -122,6 +122,15 @@ roomba(twitter_data, c("created_at", "name"))
 #> # ... with 14 more rows
 ```
 
+Shiny app included!
+===================
+
+<p align="center">
+<img src="images/shinydemo.gif" alt="roomba_gif">
+</p>
+What did that original data look like???
+========================================
+
 Feast your eyes on the original `super_data` list!
 
 ``` r
