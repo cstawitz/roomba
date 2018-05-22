@@ -14,17 +14,10 @@ roomba(inp, clean = TRUE, replacement = NA_character_, rows = NULL,
 
 \item{replacement}{Replacement for NULL values. Defaults to NA_character_.}
 
-\item{cols}{}
+\item{rows}{id to label rows}
 
-\item{x}{Element to replace}
-
-\item{replacement}{Replacement for NULL values. Defaults to NA_character_.}
+\item{cols}{columns to include}
 }
 \description{
 Tidy your nested list
-}
-\examples{
-
-
-
 }
