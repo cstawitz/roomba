@@ -7,7 +7,7 @@
 list_names(x)
 }
 \arguments{
-\item{x}{Input list}
+\item{x}{list to use}
 }
 \description{
 List all names in a list
