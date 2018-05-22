@@ -1,4 +1,5 @@
-replace_null <- function(x, replacement = NA_character_) {
+
+replace_null <- function(x, replacement = NA) {
   empty_idx <- dfs_idx(x, ~ length(.x) == 0)
   for (i in empty_idx) {
     x[[i]] <- replacement
