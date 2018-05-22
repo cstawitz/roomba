@@ -4,11 +4,20 @@
 \name{twitter_data}
 \alias{twitter_data}
 \title{Example Twitter data}
+\format{An object of class \code{list} of length 20.}
+\source{
+\url{https://developer.twitter.com/en/docs}
+}
+\usage{
+twitter_data
+}
 \description{
 Example data from Twitter API
 }
-\examples{
+\details{
 twitter_data[[1]][["id"]]
+
+[[1]: R:[1
+["id"]: R:%22id%22
 }
-\keyword{data}
-\keyword{twitter}
+\keyword{datasets}
