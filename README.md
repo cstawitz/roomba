@@ -82,8 +82,7 @@ The JSON becomes a nested R list,
 
 ``` r
 super_data <- json %>% 
-  jsonlite::fromJSON(simplifyVector = FALSE) %>% 
-  knitr::kable()
+  jsonlite::fromJSON(simplifyVector = FALSE) 
 ```
 
 which we can pull data into the columns we want with `roomba`.
@@ -91,7 +90,14 @@ which we can pull data into the columns we want with `roomba`.
 ``` r
 super_data %>%
   roomba(cols = c("name", "super_power", "location"), keep = any)
-#> # A tibble: 0 x 0
+#> # A tibble: 5 x 3
+#>   location name               super_power           
+#>   <chr>    <chr>              <chr>                 
+#> 1 here     Laura DeCicco      fixing merge conflicts
+#> 2 here     Amanda Dobbyn      flight                
+#> 3 not here Jim Hester         <NA>                  
+#> 4 here     Christine Stawitz  invisibility          
+#> 5 here     Isabella Velasquez teleportation
 ```
 
 <br>
@@ -122,210 +128,76 @@ Feast your eyes on the original `super_data` list!
 
 ``` r
 super_data
+#> $stuff
+#> $stuff$buried
+#> $stuff$buried$deep
+#> $stuff$buried$deep[[1]]
+#> $stuff$buried$deep[[1]]$location
+#> [1] "here"
+#> 
+#> $stuff$buried$deep[[1]]$name
+#> [1] "Laura DeCicco"
+#> 
+#> $stuff$buried$deep[[1]]$super_power
+#> [1] "fixing merge conflicts"
+#> 
+#> $stuff$buried$deep[[1]]$other_secret_power
+#> list()
+#> 
+#> 
+#> $stuff$buried$deep[[2]]
+#> $stuff$buried$deep[[2]]$location
+#> [1] "here"
+#> 
+#> $stuff$buried$deep[[2]]$name
+#> [1] "Amanda Dobbyn"
+#> 
+#> $stuff$buried$deep[[2]]$super_power
+#> [1] "flight"
+#> 
+#> $stuff$buried$deep[[2]]$more_nested_stuff
+#> [1] 4
+#> 
+#> 
+#> 
+#> $stuff$buried$alsodeep
+#> [1] 2342423234
+#> 
+#> $stuff$buried$deeper
+#> $stuff$buried$deeper$foo
+#> $stuff$buried$deeper$foo[[1]]
+#> $stuff$buried$deeper$foo[[1]]$location
+#> [1] "not here"
+#> 
+#> $stuff$buried$deeper$foo[[1]]$name
+#> [1] "Jim Hester"
+#> 
+#> $stuff$buried$deeper$foo[[1]]$super_power
+#> list()
+#> 
+#> 
+#> $stuff$buried$deeper$foo[[2]]
+#> $stuff$buried$deeper$foo[[2]]$location
+#> [1] "here"
+#> 
+#> $stuff$buried$deeper$foo[[2]]$name
+#> [1] "Christine Stawitz"
+#> 
+#> $stuff$buried$deeper$foo[[2]]$super_power
+#> [1] "invisibility"
+#> 
+#> 
+#> $stuff$buried$deeper$foo[[3]]
+#> $stuff$buried$deeper$foo[[3]]$location
+#> [1] "here"
+#> 
+#> $stuff$buried$deeper$foo[[3]]$name
+#> [1] "Isabella Velasquez"
+#> 
+#> $stuff$buried$deeper$foo[[3]]$super_power
+#> [1] "teleportation"
 ```
 
-<table class="kable_wrapper">
-<tbody>
-<tr>
-<td>
-<table class="kable_wrapper">
-<tbody>
-<tr>
-<td>
-<table class="kable_wrapper">
-<tbody>
-<tr>
-<td>
-<table class="kable_wrapper">
-<tbody>
-<tr>
-<td>
-<table class="kable_wrapper">
-<tbody>
-<tr>
-<td>
-| x    |
-|:-----|
-| here |
-
-</td>
-<td>
-| x             |
-|:--------------|
-| Laura DeCicco |
-
-</td>
-<td>
-| x                      |
-|:-----------------------|
-| fixing merge conflicts |
-
-</td>
-<td>
-<table class="kable_wrapper">
-<tbody>
-<tr>
-<td>
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-<td>
-<table class="kable_wrapper">
-<tbody>
-<tr>
-<td>
-| x    |
-|:-----|
-| here |
-
-</td>
-<td>
-| x             |
-|:--------------|
-| Amanda Dobbyn |
-
-</td>
-<td>
-| x      |
-|:-------|
-| flight |
-
-</td>
-<td>
-|    x|
-|----:|
-|    4|
-
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-<td>
-|           x|
-|-----------:|
-|  2342423234|
-
-</td>
-<td>
-<table class="kable_wrapper">
-<tbody>
-<tr>
-<td>
-<table class="kable_wrapper">
-<tbody>
-<tr>
-<td>
-<table class="kable_wrapper">
-<tbody>
-<tr>
-<td>
-| x        |
-|:---------|
-| not here |
-
-</td>
-<td>
-| x          |
-|:-----------|
-| Jim Hester |
-
-</td>
-<td>
-<table class="kable_wrapper">
-<tbody>
-<tr>
-<td>
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-<td>
-<table class="kable_wrapper">
-<tbody>
-<tr>
-<td>
-| x    |
-|:-----|
-| here |
-
-</td>
-<td>
-| x                 |
-|:------------------|
-| Christine Stawitz |
-
-</td>
-<td>
-| x            |
-|:-------------|
-| invisibility |
-
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-<td>
-<table class="kable_wrapper">
-<tbody>
-<tr>
-<td>
-| x    |
-|:-----|
-| here |
-
-</td>
-<td>
-| x                  |
-|:-------------------|
-| Isabella Velasquez |
-
-</td>
-<td>
-| x             |
-|:--------------|
-| teleportation |
-
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
 And just the *first* element of the `twitter` dataset 😱
 
 ``` r
