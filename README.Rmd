@@ -27,7 +27,9 @@ of sources.
 </p>
 
 
+
 *Key features:*
+
 
 * `roomba()` searches deeply-nested list for names specified in
   `cols` (a character vector) and returns a `tibble` with the
@@ -103,37 +105,37 @@ json <- '
     "stuff": {
       "buried": {
         "deep": [
-        {
-          "location": "here",
-          "name": "Amanda Dobbyn",
-          "super_power": "flight",
-          "more_nested_stuff": 4
-        },
-        {
-          "location": "here",
-          "name": "Isabella Velasquez",
-          "super_power": "teleportation"
-        }
+          {
+            "location": "here",
+            "name": "Laura DeCicco",
+            "super_power": "fixing merge conflicts",
+            "other_secret_power": []
+          },
+          {
+            "location": "here",
+            "name": "Amanda Dobbyn",
+            "super_power": "flight",
+            "more_nested_stuff": 4
+          }
         ],
         "alsodeep": 2342423234,
         "deeper": {
           "foo": [
-          {
-            "location": "not here",
-            "name": "Jim Hester",
-            "super_power": []
-          },
-          {
-            "location": "here",
-            "name": "Christine Stawitz",
-            "super_power": "invisibility"
-          },
-          {
-          "location": "here",
-          "name": "Laura DeCicco",
-          "super_power": "fixing merge conflicts",
-          "other_secret_power": []
-          }
+            {
+              "location": "not here",
+              "name": "Jim Hester",
+              "super_power": []
+            },
+            {
+              "location": "here",
+              "name": "Christine Stawitz",
+              "super_power": "invisibility"
+            },
+            {
+              "location": "here",
+              "name": "Isabella Velasquez",
+              "super_power": "teleportation"
+            }
           ]
         }
       }
@@ -141,20 +143,22 @@ json <- '
   }'
 ```
 
-The JSON becomes a nested R list
+The JSON becomes a nested R list,
 
 ```{r}
 super_data <- json %>% 
-  jsonlite::fromJSON(simplifyVector = FALSE)
+  jsonlite::fromJSON(simplifyVector = FALSE) 
 ```
 
-Which we can pull data into the columns we want with `roomba`.
+which we can pull data into the columns we want with `roomba`.
 
 ```{r}
 super_data %>%
   roomba(cols = c("name", "super_power", "location"), keep = any)
 ```
 
+
+<br>
 
 Let's try with a real-world Twitter example (see package data to use this data).
 
@@ -183,4 +187,6 @@ twitter_data[[1]]
 
 **Happy cleaning!**
 
-![](https://media.giphy.com/media/mwMowfcaEcvpm/giphy.gif)
+<p align="center">
+  <img src="https://media.giphy.com/media/mwMowfcaEcvpm/giphy.gif" alt="roomba_gif">
+</p>
