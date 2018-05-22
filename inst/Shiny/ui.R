@@ -17,8 +17,10 @@ ui <- fluidPage(
            conditionalPanel(condition="length(input.data)>0",
             fluidRow(column(4,verbatimTextOutput("names")))),
            conditionalPanel(condition="length(output.varSet)>0",
-                            uiOutput("varSet"))
+                            uiOutput("varSet"), 
+                            actionButton("makePlot", "Plot"))
           ),
-      mainPanel()
+          mainPanel(conditionalPanel(condition="length(output.varSet)>0",
+                                 plotOutput("plot")))
     )
 )
