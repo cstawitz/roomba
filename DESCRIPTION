@@ -9,11 +9,14 @@ Description: More about what it does (maybe more than one line)
 License: MIT + file LICENSE
 Depends:
     R (>= 3.0)
-RoxygenNote: 6.0.1
+RoxygenNote: 6.0.1.9000
 Suggests: 
     knitr, 
     rmarkdown,
-    testthat
+    testthat,
+    jsonlite,
+    rlist,
+    dplyr
 VignetteBuilder: knitr
 Imports: 
     assertthat,
@@ -21,4 +24,4 @@ Imports:
     purrr
 Encoding: UTF-8
 LazyData: true
-
+Roxygen: list(markdown = TRUE)
