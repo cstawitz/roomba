@@ -14,11 +14,11 @@ knitr::opts_chunk$set(
 # roomba
 [![Travis build status](https://travis-ci.com/ropenscilabs/roomba.svg?branch=master)](https://travis-ci.com/ropenscilabs/roomba)
 
-This is a package to transform large, multi-nested lists into a more
-user-friendly format (i.e. a `tibble`) in `R`. The initial focus is on making
-processing of return values from `jsonlite::fromJSON()` queries more seamless,
-but ideally this package should be useful for deeply-nested lists from an array
-of sources.
+<p align="center">
+  <img src="images/sticker.png" alt="roomba_gif">
+</p>
+
+This is a package to transform large, multi-nested lists into a moreuser-friendly format (i.e. a `tibble`) in `R`. The initial focus is on making processing of return values from `jsonlite::fromJSON()` queries more seamless, but ideally this package should be useful for deeply-nested lists from an array of sources.
 
 <!-- ![roomba_gif](https://media.giphy.com/media/mwMowfcaEcvpm/giphy.gif) -->
 

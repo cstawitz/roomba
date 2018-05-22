@@ -10,5 +10,5 @@
 #' }
 #' }
 shiny_roomba <- function(browse=TRUE){
-  runApp(system.file('Shiny', package='roomba'), launch.browser = browse)
+  shiny::runApp(system.file('Shiny', package='roomba'), launch.browser = browse)
 }

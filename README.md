@@ -4,7 +4,10 @@ roomba
 
 [![Travis build status](https://travis-ci.com/ropenscilabs/roomba.svg?branch=master)](https://travis-ci.com/ropenscilabs/roomba)
 
-This is a package to transform large, multi-nested lists into a more user-friendly format (i.e. a `tibble`) in `R`. The initial focus is on making processing of return values from `jsonlite::fromJSON()` queries more seamless, but ideally this package should be useful for deeply-nested lists from an array of sources.
+<p align="center">
+<img src="images/sticker.png" alt="roomba_gif">
+</p>
+This is a package to transform large, multi-nested lists into a moreuser-friendly format (i.e. a `tibble`) in `R`. The initial focus is on making processing of return values from `jsonlite::fromJSON()` queries more seamless, but ideally this package should be useful for deeply-nested lists from an array of sources.
 
 <!-- ![roomba_gif](https://media.giphy.com/media/mwMowfcaEcvpm/giphy.gif) -->
 <p align="center">
@@ -111,7 +114,7 @@ roomba(twitter_data, c("created_at", "name"))
 #>    name                 created_at                    
 #>    <chr>                <chr>                         
 #>  1 Code for America     Mon Aug 10 18:59:29 +0000 2009
-#>  2 Ben Lorica 罗瑞卡    Mon Dec 22 22:06:18 +0000 2008
+#>  2 Ben Lorica <U+7F57><U+745E><U+5361>    Mon Dec 22 22:06:18 +0000 2008
 #>  3 Dan Sholler          Thu Apr 03 20:09:24 +0000 2014
 #>  4 Code for America     Mon Aug 10 18:59:29 +0000 2009
 #>  5 FiveThirtyEight      Tue Jan 21 21:39:32 +0000 2014
