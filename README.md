@@ -90,15 +90,15 @@ which we can pull data into the columns we want with `roomba`.
 
 ``` r
 super_data %>%
-  roomba(cols = c("name", "super_power", "location", "more_nested_stuff"), keep = any)
-#> # A tibble: 5 x 4
-#>   location name               super_power            more_nested_stuff
-#>   <chr>    <chr>              <chr>                              <int>
-#> 1 here     Laura DeCicco      fixing merge conflicts                NA
-#> 2 here     Amanda Dobbyn      flight                                 4
-#> 3 not here Jim Hester         <NA>                                  NA
-#> 4 here     Christine Stawitz  invisibility                           5
-#> 5 here     Isabella Velasquez teleportation                         NA
+  roomba(cols = c("name", "super_power", "more_nested_stuff"), keep = any)
+#> # A tibble: 5 x 3
+#>   name               super_power            more_nested_stuff
+#>   <chr>              <chr>                              <int>
+#> 1 Laura DeCicco      fixing merge conflicts                NA
+#> 2 Amanda Dobbyn      flight                                 4
+#> 3 Jim Hester         <NA>                                  NA
+#> 4 Christine Stawitz  invisibility                           5
+#> 5 Isabella Velasquez teleportation                         NA
 ```
 
 <br>

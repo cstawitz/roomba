@@ -107,7 +107,7 @@ which we can pull data into the columns we want with `roomba`.
 
 ```{r}
 super_data %>%
-  roomba(cols = c("name", "super_power", "location", "more_nested_stuff"), keep = any)
+  roomba(cols = c("name", "super_power", "more_nested_stuff"), keep = any)
 ```
 
 
