@@ -3,11 +3,11 @@ Package: roomba
 Title: Tidy up nested list hairballs
 Version: 0.1.0
 Authors@R: c(
-    person("Jim", "Hester", email = "james.f.hester@gmail.com", role = c("aut", "cre")),
     person("Amanda", "Dobbyn", role = "aut"),
     person("Christine", "Stawitz", role = "aut"),
-    person("Laura", "DeCicco", role = "aut"),
-    person("Isabella", "Velasquez", role = "aut")
+    person("Isabella", "Velasquez", role = "aut"),
+    person("Jim", "Hester", email = "james.f.hester@gmail.com", role = c("aut", "cre")),
+    person("Laura", "DeCicco", role = "aut")
     )
 Description: This is a package to transform large, multi-nested lists into a more
   user-friendly format. The initial focus is on making
