@@ -74,12 +74,12 @@ toy_data <- jsonlite::fromJSON('
         "deeper": {
           "foo": [
           {
-            "goodstuff": 5,
+            "goodstuff": "not here",
             "name": "barb",
             "secret_power": []
           },
           {
-             "goodstuff": "here",
+             "goodstuff": "here",    // More deeply nested "goodstuff" than "goodstuff"s above
              "name": "borris"
           }
             ]
