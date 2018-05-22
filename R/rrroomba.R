@@ -16,20 +16,21 @@
 
 roomba <- function(inp, cols = NULL, .default = NA,
                     .keep = all) {
+
   assertthat::assert_that(length(inp) > 0,
                           msg = "Input is of length 0.")
 
   assertthat::assert_that(!is.null(cols),
                           msg = "cols must be non-NULL.")
 
-  .keep <- match.fun(.keep)
+  keep <- match.fun(keep)
 
   inp_clean <- inp %>%
     replace_null(replacement = .default)
   # -- Message that NULLs were replaced with NAs?
 
   has_good_stuff <- function(data, cols) {
-    .keep(map_lgl(cols, ~ length(data[[.x]]) > 0))
+    keep(purrr::map_lgl(cols, ~ length(data[[.x]]) > 0))
   }
 
   indices <-
@@ -44,6 +45,4 @@ roomba <- function(inp, cols = NULL, .default = NA,
 
   return(out)
 }
-
-
 
