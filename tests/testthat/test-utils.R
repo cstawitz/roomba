@@ -18,7 +18,6 @@ test_that("Test that replace_null() works with numbers", {
                                  "deep": [
                                  {
                                  "goodstuff": "here",
-                                 "name": "Bob Rudis",
                                  "secret_power": 5,
                                  "other_secret_power": []
                                  },
@@ -54,4 +53,11 @@ test_that("Test that replace_null() works with numbers", {
     dplyr::pull(secret_power)
 
   expect_type(secret_power, "integer")
+
+  toy_names <- cleaned_lst %>% dfs_idx(~ .x$goodstuff == "here") %>%
+    purrr:::map_dfr(~ cleaned_lst[[.x]]) %>%
+    dplyr::pull(name)
+
+  expect_type(toy_names, "character")
+
 })
