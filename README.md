@@ -25,6 +25,16 @@ You can install the development version from [GitHub](https://github.com/) with:
 ``` r
 # install.packages("devtools")
 devtools::install_github("ropenscilabs/roomba")
+#> Using GitHub PAT from envvar GITHUB_PAT
+#> Downloading GitHub repo ropenscilabs/roomba@master
+#> from URL https://api.github.com/repos/ropenscilabs/roomba/zipball/master
+#> Installing roomba
+#> '/Library/Frameworks/R.framework/Resources/bin/R' --no-site-file  \
+#>   --no-environ --no-save --no-restore --quiet CMD INSTALL  \
+#>   '/private/var/folders/yp/_8k5hlr57dn2qp841c3kgbcr0000gn/T/RtmpWkqbXF/devtools1109627a2dc20/ropenscilabs-roomba-5cdff6d'  \
+#>   --library='/Library/Frameworks/R.framework/Versions/3.4/Resources/library'  \
+#>   --install-tests
+#> 
 ```
 
 Example
