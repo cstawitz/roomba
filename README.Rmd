@@ -63,15 +63,19 @@ json <- '
         "deep": [
         {
           "location": "here",
-          "name": "Bob Rudis",
-          "super_power": "invisibility",
-          "other_secret_power": []
+          "name": "Amanda",
+          "super_power": "flight",
+          "more_nested_stuff": 4
         },
         {
           "location": "here",
-          "name": "Amanda Dobbyn",
-          "secret_power": "flight",
-          "more_nested_stuff": 4
+          "name": "Christine",
+          "super_power": "water-breathing"
+        },
+        {
+          "location": "here",
+          "name": "Isabella",
+          "super_power": "teleportation"
         }
         ],
         "alsodeep": 2342423234,
@@ -79,12 +83,12 @@ json <- '
           "foo": [
           {
             "location": "not here",
-            "name": "Jim Hester",
-            "secret_power": []
+            "name": "Jim"
           },
           {
              "location": "here",
-             "name": "Borris"
+             "name": "Laura",
+             "super_power": "git"
           }
           ]
         }
@@ -103,5 +107,5 @@ Which we can pull data into the columns we want with `roomba`.
 
 ```{r}
 super_data %>%
-  roomba(cols = c("name", "secret_power", "location"), keep = any)
+  roomba(cols = c("name", "super_power", "location"), keep = any)
 ```
