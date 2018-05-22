@@ -62,15 +62,15 @@ json <- '
       "buried": {
         "deep": [
         {
-          "goodstuff": "here",
+          "location": "here",
           "name": "Bob Rudis",
-          "secret_power": 5,
+          "super_power": "invisibility",
           "other_secret_power": []
         },
         {
-          "goodstuff": "here",
+          "location": "here",
           "name": "Amanda Dobbyn",
-          "secret_power": 4, 
+          "secret_power": "flight",
           "more_nested_stuff": 4
         }
         ],
@@ -78,21 +78,20 @@ json <- '
         "deeper": {
           "foo": [
           {
-            "goodstuff": "not here",
-            "name": "barb",
+            "location": "not here",
+            "name": "Jim Hester",
             "secret_power": []
           },
           {
-             "goodstuff": "here",    // More deeply nested "goodstuff" than "goodstuff"s above
-             "name": "borris"
+             "location": "here",
+             "name": "Borris"
           }
-            ]
+          ]
         }
       }
     }
   }'
 ```
-
 
 The JSON becomes a nested R list
 
@@ -100,12 +99,9 @@ The JSON becomes a nested R list
 super_data <- jsonlite::fromJSON(json, simplifyVector = FALSE)
 ```
 
-which we can pull data into the columns we want with `roomba`.
+Which we can pull data into the columns we want with `roomba`.
 
 ```{r}
-super_data %>% 
-  roomba(cols = c("name", "secret_power", "goodstuff"), .keep = any)
+super_data %>%
+  roomba(cols = c("name", "secret_power", "location"), keep = any)
 ```
-
-
-

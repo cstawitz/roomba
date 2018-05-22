@@ -40,15 +40,15 @@ toy_data <- jsonlite::fromJSON('
       "buried": {
         "deep": [
         {
-          "goodstuff": "here",
+          "location": "here",
           "name": "Bob Rudis",
-          "secret_power": 5,
+          "super_power": "invisibility",
           "other_secret_power": []
         },
         {
-          "goodstuff": "here",
+          "location": "here",
           "name": "Amanda Dobbyn",
-          "secret_power": 4, 
+          "secret_power": "flight",
           "more_nested_stuff": 4
         }
         ],
@@ -56,85 +56,27 @@ toy_data <- jsonlite::fromJSON('
         "deeper": {
           "foo": [
           {
-            "goodstuff": 5,
-            "name": "barb",
+            "location": "not here",
+            "name": "Jim Hester",
             "secret_power": []
           },
           {
-             "goodstuff": "here",
-             "name": "borris"
+             "location": "here",
+             "name": "Borris"
           }
-            ]
+          ]
         }
       }
     }
   }', simplifyVector = FALSE)
 
-
-# Replace the NULLs at every level with the default replacement, NA
-y <- toy_data %>% replace_null() 
-y
-#> $stuff
-#> $stuff$buried
-#> $stuff$buried$deep
-#> $stuff$buried$deep[[1]]
-#> $stuff$buried$deep[[1]]$goodstuff
-#> [1] "here"
-#> 
-#> $stuff$buried$deep[[1]]$name
-#> [1] "Bob Rudis"
-#> 
-#> $stuff$buried$deep[[1]]$secret_power
-#> [1] 5
-#> 
-#> $stuff$buried$deep[[1]]$other_secret_power
-#> [1] NA
-#> 
-#> 
-#> $stuff$buried$deep[[2]]
-#> $stuff$buried$deep[[2]]$goodstuff
-#> [1] "here"
-#> 
-#> $stuff$buried$deep[[2]]$name
-#> [1] "Amanda Dobbyn"
-#> 
-#> $stuff$buried$deep[[2]]$secret_power
-#> [1] 4
-#> 
-#> $stuff$buried$deep[[2]]$more_nested_stuff
-#> [1] 4
-#> 
-#> 
-#> 
-#> $stuff$buried$alsodeep
-#> [1] 2342423234
-#> 
-#> $stuff$buried$deeper
-#> $stuff$buried$deeper$foo
-#> $stuff$buried$deeper$foo[[1]]
-#> $stuff$buried$deeper$foo[[1]]$goodstuff
-#> [1] 5
-#> 
-#> $stuff$buried$deeper$foo[[1]]$name
-#> [1] "barb"
-#> 
-#> $stuff$buried$deeper$foo[[1]]$secret_power
-#> [1] NA
-#> 
-#> 
-#> $stuff$buried$deeper$foo[[2]]
-#> $stuff$buried$deeper$foo[[2]]$goodstuff
-#> [1] "here"
-#> 
-#> $stuff$buried$deeper$foo[[2]]$name
-#> [1] "borris"
-
-y %>% dfs_idx(~ .x$goodstuff == "here") %>%
-  purrr:::map_dfr(~ y[[.x]])
-#> # A tibble: 3 x 5
-#>   goodstuff name          secret_power other_secret_power more_nested_stu…
-#>   <chr>     <chr>                <int> <chr>                         <int>
-#> 1 here      Bob Rudis                5 <NA>                             NA
-#> 2 here      Amanda Dobbyn            4 <NA>                              4
-#> 3 here      borris                  NA <NA>                             NA
+toy_data %>%
+  roomba(cols = c("name", "location", "secret_power", "other_secret_power"), keep = any)
+#> # A tibble: 4 x 4
+#>   location name          other_secret_power secret_power
+#>   <chr>    <chr>         <lgl>              <chr>       
+#> 1 here     Bob Rudis     NA                 <NA>        
+#> 2 here     Amanda Dobbyn NA                 flight      
+#> 3 not here Jim Hester    NA                 <NA>        
+#> 4 here     Borris        NA                 <NA>
 ```

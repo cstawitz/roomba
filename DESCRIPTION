@@ -21,6 +21,7 @@ VignetteBuilder: knitr
 Imports: 
     assertthat,
     magrittr,
+    dplyr,
     purrr
 Encoding: UTF-8
 LazyData: true

@@ -36,12 +36,12 @@ roomba <- function(inp, cols = NULL, .default = NA,
   indices <-
     dfs_idx(inp_clean, ~ has_good_stuff(data = .x, cols = cols))
 
-  out <- indices %>%
-    purrr:::map_dfr(
-      function(.x) {
-        res <- inp[[.x]]
-        res[names(res) %in% cols]
-      })
+  out <- indices %>% purrr::map(
+    function(.x) {
+      res <- inp[[.x]]
+      res[names(res) %in% cols]
+    }) %>% replace_null() %>%
+  dplyr::bind_rows()
 
   return(out)
 }
