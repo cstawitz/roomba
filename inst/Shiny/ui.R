@@ -15,7 +15,9 @@ ui <- fluidPage(
         # Output: Names of first level list objects----
         
            conditionalPanel(condition="length(input.data)>0",
-            fluidRow(column(4,verbatimTextOutput("names"))))
+            fluidRow(column(4,verbatimTextOutput("names")))),
+           conditionalPanel(condition="length(output.varSet)>0",
+                            uiOutput("varSet"))
           ),
       mainPanel()
     )
