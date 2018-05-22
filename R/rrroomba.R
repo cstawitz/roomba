@@ -10,10 +10,8 @@
 #'
 #' @examples
 #'
-#' toy_data %>% roomba(cols = c("name", "goodstuff"), .keep = any)
-#' toy_data %>% roomba(cols = c("name", "goodstuff", ""), .keep = any)
-
-
+#' toy_data %>% roomba(cols = c("name", "goodstuff"), keep = any)
+#' toy_data %>% roomba(cols = c("name", "goodstuff", ""), keep = any)
 roomba <- function(inp, cols = NULL, .default = NA,
                     .keep = all) {
 

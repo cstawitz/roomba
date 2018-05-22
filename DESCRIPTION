@@ -15,8 +15,7 @@ Suggests:
     rmarkdown,
     testthat,
     jsonlite,
-    rlist,
-    dplyr
+    rlist
 VignetteBuilder: knitr
 Imports: 
     assertthat,

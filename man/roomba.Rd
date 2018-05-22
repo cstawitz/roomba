@@ -20,6 +20,6 @@ Tidy your nested list
 }
 \examples{
 
-toy_data \%>\% roomba(cols = c("name", "goodstuff"), .keep = any)
-toy_data \%>\% roomba(cols = c("name", "goodstuff", ""), .keep = any)
+toy_data \%>\% roomba(cols = c("name", "goodstuff"), keep = any)
+toy_data \%>\% roomba(cols = c("name", "goodstuff", ""), keep = any)
 }
