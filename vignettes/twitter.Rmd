@@ -7,8 +7,11 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-This vignette has two goals:
+This vignette demonstrates the functionality of the `roomba` package on Twitter API data.
 
+# Downloading Data
+
+For more information on downloading Twitter data, please check out the [httr](https://github.com/r-lib/httr/blob/master/demo/oauth1-twitter.r) package.
 
 ```{r, eval = FALSE}
 library(httr)
@@ -29,4 +32,21 @@ req <- GET("https://api.twitter.com/1.1/statuses/home_timeline.json",
 stop_for_status(req)
 
 content(req)
+```
+
+# Examples
+
+```{r, echo=FALSE}
+library(tidyverse)
+library(roomba)
+data("twitter_data")
+```
+
+```{r}
+twitter_data <- twitter_data
+
+twitter_data %>% roomba(cols = c("followers_count", "friends_count")) %>% 
+  ggplot(aes(x = followers_count, y = friends_count)) +
+  geom_point() + 
+  theme_minimal()
 ```
