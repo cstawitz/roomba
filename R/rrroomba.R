@@ -21,7 +21,7 @@ roomba <- function(inp, replacement = NA,
   assertthat::assert_that(length(inp) > 0,
                           msg = "Input is of length 0.")
 
-  assertthat::assert_that(!is.null(deparse(substitute(cols))),
+  assertthat::assert_that(!is.null(cols),
                           msg = "cols must be non-NULL.")
 
 
@@ -30,9 +30,8 @@ roomba <- function(inp, replacement = NA,
   # -- Message that NULLs were replaced with NAs?
 
   has_good_stuff <- function(x, y) {
-    y <- enquo(y)
-    if (length(x %>% select(!!y)) > 0) {
-      return(x %>% select(!!y))
+    if (length(x[[y]]) > 0) {
+      return(x[[y]])
     }
   }
 
@@ -41,14 +40,9 @@ roomba <- function(inp, replacement = NA,
     return(out)
   }
 
-  q_first_col <- enquo(cols[1])
-
   inp_filtered <- inp_clean %>%
-    dfs_idx(~ length(.x %>% select(!!q_first_col)) > 0)
-    # dfs_idx(~ length(.x[[cols[1]]]) > 0)
+    dfs_idx(~ length(.x[[cols[1]]]) > 0)
     # dfs_idx(~ has_good_stuff(.x, cols[1]))
-
-
 
   out <- inp_filtered %>%
     purrr:::map_dfr(~ inp[[.x]])
@@ -61,9 +55,10 @@ roomba <- function(inp, replacement = NA,
   return(out)
 }
 
-roomba(y, cols = name)
-
 roomba(y, cols = c("name", "secret_power"))
+
+
+roomba(y, cols = name)
 
 
 
