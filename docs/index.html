@@ -61,7 +61,14 @@
   </ul>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/ropenscilabs/roomba">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -86,14 +93,10 @@
 <img src="https://media.giphy.com/media/mP9hvHDhy4E9i/giphy.gif" alt="roomba_gif"></p>
 <p><em>Key features:</em></p>
 <ul>
-<li>
-<code><a href="reference/roomba.html">roomba()</a></code> searches deeply-nested list for names specified in <code>cols</code> (a character vector) and returns a <code>tibble</code> with the associated column titles. Nothing further about nesting hierarchy or depth need be specified.</li>
-<li>Handles empty values gracefully by substituting <code>NULL</code> values with <code>NA</code> or user-specified value in <code>default</code>, or truncates lists appropriately.
-<ul>
-<li>If you’re only interested in sniffing out and replacing all <code>NULL</code>s, turn to the <code><a href="reference/replace_null.html">replace_null()</a></code> function.</li>
-</ul>
-</li>
-<li>Option to <code>keep</code> <code>any</code> or <code>all</code> data from the columns supplied</li>
+<li><p><code><a href="reference/roomba.html">roomba()</a></code> searches deeply-nested list for names specified in <code>cols</code> (a character vector) and returns a <code>tibble</code> with the associated column titles. Nothing further about nesting hierarchy or depth need be specified.</p></li>
+<li><p>Handles empty values gracefully by substituting <code>NULL</code> values with <code>NA</code> or user-specified value in <code>default</code>, or truncates lists appropriately.</p></li>
+<li><p>If you’re only interested in sniffing out and replacing all <code>NULL</code>s, turn to the <code><a href="reference/replace_null.html">replace_null()</a></code> function.</p></li>
+<li><p>Option to <code>keep</code> <code>any</code> or <code>all</code> data from the columns supplied</p></li>
 </ul>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -101,10 +104,6 @@
 <p>You can install the development version from <a href="https://github.com/">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"ropenscilabs/roomba"</span>)</a></code></pre></div>
-</div>
-<div id="example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
 <p>Say we have some JSON from a pesky API.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(roomba)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"></a>
@@ -127,8 +126,8 @@
 <a class="sourceLine" id="cb2-19" data-line-number="19"><span class="st">          }</span></a>
 <a class="sourceLine" id="cb2-20" data-line-number="20"><span class="st">        ],</span></a>
 <a class="sourceLine" id="cb2-21" data-line-number="21"><span class="st">        "alsodeep": 2342423234,</span></a>
-<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="st">        "deeper": {</span></a>
-<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="st">          "foo": [</span></a>
+<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="st">        "stilldeep": {</span></a>
+<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="st">          "even_deeper": [</span></a>
 <a class="sourceLine" id="cb2-24" data-line-number="24"><span class="st">            {</span></a>
 <a class="sourceLine" id="cb2-25" data-line-number="25"><span class="st">              "location": "not here",</span></a>
 <a class="sourceLine" id="cb2-26" data-line-number="26"><span class="st">              "name": "Jim Hester",</span></a>
@@ -137,32 +136,33 @@
 <a class="sourceLine" id="cb2-29" data-line-number="29"><span class="st">            {</span></a>
 <a class="sourceLine" id="cb2-30" data-line-number="30"><span class="st">              "location": "here",</span></a>
 <a class="sourceLine" id="cb2-31" data-line-number="31"><span class="st">              "name": "Christine Stawitz",</span></a>
-<a class="sourceLine" id="cb2-32" data-line-number="32"><span class="st">              "super_power": "invisibility"</span></a>
-<a class="sourceLine" id="cb2-33" data-line-number="33"><span class="st">            },</span></a>
-<a class="sourceLine" id="cb2-34" data-line-number="34"><span class="st">            {</span></a>
-<a class="sourceLine" id="cb2-35" data-line-number="35"><span class="st">              "location": "here",</span></a>
-<a class="sourceLine" id="cb2-36" data-line-number="36"><span class="st">              "name": "Isabella Velasquez",</span></a>
-<a class="sourceLine" id="cb2-37" data-line-number="37"><span class="st">              "super_power": "teleportation"</span></a>
-<a class="sourceLine" id="cb2-38" data-line-number="38"><span class="st">            }</span></a>
-<a class="sourceLine" id="cb2-39" data-line-number="39"><span class="st">          ]</span></a>
-<a class="sourceLine" id="cb2-40" data-line-number="40"><span class="st">        }</span></a>
-<a class="sourceLine" id="cb2-41" data-line-number="41"><span class="st">      }</span></a>
-<a class="sourceLine" id="cb2-42" data-line-number="42"><span class="st">    }</span></a>
-<a class="sourceLine" id="cb2-43" data-line-number="43"><span class="st">  }'</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-32" data-line-number="32"><span class="st">              "super_power": "invisibility",</span></a>
+<a class="sourceLine" id="cb2-33" data-line-number="33"><span class="st">              "more_nested_stuff": 5</span></a>
+<a class="sourceLine" id="cb2-34" data-line-number="34"><span class="st">            },</span></a>
+<a class="sourceLine" id="cb2-35" data-line-number="35"><span class="st">            {</span></a>
+<a class="sourceLine" id="cb2-36" data-line-number="36"><span class="st">              "location": "here",</span></a>
+<a class="sourceLine" id="cb2-37" data-line-number="37"><span class="st">              "name": "Isabella Velasquez",</span></a>
+<a class="sourceLine" id="cb2-38" data-line-number="38"><span class="st">              "super_power": "teleportation"</span></a>
+<a class="sourceLine" id="cb2-39" data-line-number="39"><span class="st">            }</span></a>
+<a class="sourceLine" id="cb2-40" data-line-number="40"><span class="st">          ]</span></a>
+<a class="sourceLine" id="cb2-41" data-line-number="41"><span class="st">        }</span></a>
+<a class="sourceLine" id="cb2-42" data-line-number="42"><span class="st">      }</span></a>
+<a class="sourceLine" id="cb2-43" data-line-number="43"><span class="st">    }</span></a>
+<a class="sourceLine" id="cb2-44" data-line-number="44"><span class="st">  }'</span></a></code></pre></div>
 <p>The JSON becomes a nested R list,</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">super_data &lt;-<span class="st"> </span>json <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st">  </span>jsonlite<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON">fromJSON</a></span>(<span class="dt">simplifyVector =</span> <span class="ot">FALSE</span>) </a></code></pre></div>
 <p>which we can pull data into the columns we want with <code>roomba</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">super_data <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/roomba.html">roomba</a></span>(<span class="dt">cols =</span> <span class="kw">c</span>(<span class="st">"name"</span>, <span class="st">"super_power"</span>, <span class="st">"location"</span>), <span class="dt">keep =</span> any)</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; # A tibble: 5 x 3</span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt;   location name               super_power           </span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;              &lt;chr&gt;                 </span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; 1 here     Laura DeCicco      fixing merge conflicts</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; 2 here     Amanda Dobbyn      flight                </span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; 3 not here Jim Hester         &lt;NA&gt;                  </span></a>
-<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt; 4 here     Christine Stawitz  invisibility          </span></a>
-<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt; 5 here     Isabella Velasquez teleportation</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/roomba.html">roomba</a></span>(<span class="dt">cols =</span> <span class="kw">c</span>(<span class="st">"name"</span>, <span class="st">"super_power"</span>, <span class="st">"location"</span>, <span class="st">"more_nested_stuff"</span>), <span class="dt">keep =</span> any)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; # A tibble: 5 x 4</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt;   location name               super_power            more_nested_stuff</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;              &lt;chr&gt;                              &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; 1 here     Laura DeCicco      fixing merge conflicts                NA</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; 2 here     Amanda Dobbyn      flight                                 4</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; 3 not here Jim Hester         &lt;NA&gt;                                  NA</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt; 4 here     Christine Stawitz  invisibility                           5</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt; 5 here     Isabella Velasquez teleportation                         NA</span></a></code></pre></div>
 <p><br></p>
 <p>Let’s try with a real-world Twitter example (see package data to use this data).</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="reference/roomba.html">roomba</a></span>(twitter_data, <span class="kw">c</span>(<span class="st">"created_at"</span>, <span class="st">"name"</span>))</a>
@@ -180,7 +180,18 @@
 <a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt;  9 Data Analysts 4 Good Wed May 07 16:55:33 +0000 2014</span></a>
 <a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; 10 Ryan Frederick       Sun Mar 01 19:06:53 +0000 2009</span></a>
 <a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; # ... with 14 more rows</span></a></code></pre></div>
-<hr>
+</div>
+</div>
+<div id="shiny-app-included" class="section level1">
+<h1 class="hasAnchor">
+<a href="#shiny-app-included" class="anchor"></a>Shiny app included!</h1>
+<p align="center">
+<img src="images/shinydemo.gif" alt="roomba_gif"></p>
+<p><br></p>
+</div>
+<div id="what-did-that-original-data-look-like" class="section level1">
+<h1 class="hasAnchor">
+<a href="#what-did-that-original-data-look-like" class="anchor"></a>What did that original data look like???</h1>
 <p>Feast your eyes on the original <code>super_data</code> list!</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">super_data</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; $stuff</span></a>
@@ -218,39 +229,42 @@
 <a class="sourceLine" id="cb6-34" data-line-number="34"><span class="co">#&gt; $stuff$buried$alsodeep</span></a>
 <a class="sourceLine" id="cb6-35" data-line-number="35"><span class="co">#&gt; [1] 2342423234</span></a>
 <a class="sourceLine" id="cb6-36" data-line-number="36"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-37" data-line-number="37"><span class="co">#&gt; $stuff$buried$deeper</span></a>
-<a class="sourceLine" id="cb6-38" data-line-number="38"><span class="co">#&gt; $stuff$buried$deeper$foo</span></a>
-<a class="sourceLine" id="cb6-39" data-line-number="39"><span class="co">#&gt; $stuff$buried$deeper$foo[[1]]</span></a>
-<a class="sourceLine" id="cb6-40" data-line-number="40"><span class="co">#&gt; $stuff$buried$deeper$foo[[1]]$location</span></a>
+<a class="sourceLine" id="cb6-37" data-line-number="37"><span class="co">#&gt; $stuff$buried$stilldeep</span></a>
+<a class="sourceLine" id="cb6-38" data-line-number="38"><span class="co">#&gt; $stuff$buried$stilldeep$even_deeper</span></a>
+<a class="sourceLine" id="cb6-39" data-line-number="39"><span class="co">#&gt; $stuff$buried$stilldeep$even_deeper[[1]]</span></a>
+<a class="sourceLine" id="cb6-40" data-line-number="40"><span class="co">#&gt; $stuff$buried$stilldeep$even_deeper[[1]]$location</span></a>
 <a class="sourceLine" id="cb6-41" data-line-number="41"><span class="co">#&gt; [1] "not here"</span></a>
 <a class="sourceLine" id="cb6-42" data-line-number="42"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-43" data-line-number="43"><span class="co">#&gt; $stuff$buried$deeper$foo[[1]]$name</span></a>
+<a class="sourceLine" id="cb6-43" data-line-number="43"><span class="co">#&gt; $stuff$buried$stilldeep$even_deeper[[1]]$name</span></a>
 <a class="sourceLine" id="cb6-44" data-line-number="44"><span class="co">#&gt; [1] "Jim Hester"</span></a>
 <a class="sourceLine" id="cb6-45" data-line-number="45"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-46" data-line-number="46"><span class="co">#&gt; $stuff$buried$deeper$foo[[1]]$super_power</span></a>
+<a class="sourceLine" id="cb6-46" data-line-number="46"><span class="co">#&gt; $stuff$buried$stilldeep$even_deeper[[1]]$super_power</span></a>
 <a class="sourceLine" id="cb6-47" data-line-number="47"><span class="co">#&gt; list()</span></a>
 <a class="sourceLine" id="cb6-48" data-line-number="48"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb6-49" data-line-number="49"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-50" data-line-number="50"><span class="co">#&gt; $stuff$buried$deeper$foo[[2]]</span></a>
-<a class="sourceLine" id="cb6-51" data-line-number="51"><span class="co">#&gt; $stuff$buried$deeper$foo[[2]]$location</span></a>
+<a class="sourceLine" id="cb6-50" data-line-number="50"><span class="co">#&gt; $stuff$buried$stilldeep$even_deeper[[2]]</span></a>
+<a class="sourceLine" id="cb6-51" data-line-number="51"><span class="co">#&gt; $stuff$buried$stilldeep$even_deeper[[2]]$location</span></a>
 <a class="sourceLine" id="cb6-52" data-line-number="52"><span class="co">#&gt; [1] "here"</span></a>
 <a class="sourceLine" id="cb6-53" data-line-number="53"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-54" data-line-number="54"><span class="co">#&gt; $stuff$buried$deeper$foo[[2]]$name</span></a>
+<a class="sourceLine" id="cb6-54" data-line-number="54"><span class="co">#&gt; $stuff$buried$stilldeep$even_deeper[[2]]$name</span></a>
 <a class="sourceLine" id="cb6-55" data-line-number="55"><span class="co">#&gt; [1] "Christine Stawitz"</span></a>
 <a class="sourceLine" id="cb6-56" data-line-number="56"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-57" data-line-number="57"><span class="co">#&gt; $stuff$buried$deeper$foo[[2]]$super_power</span></a>
+<a class="sourceLine" id="cb6-57" data-line-number="57"><span class="co">#&gt; $stuff$buried$stilldeep$even_deeper[[2]]$super_power</span></a>
 <a class="sourceLine" id="cb6-58" data-line-number="58"><span class="co">#&gt; [1] "invisibility"</span></a>
 <a class="sourceLine" id="cb6-59" data-line-number="59"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-60" data-line-number="60"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-61" data-line-number="61"><span class="co">#&gt; $stuff$buried$deeper$foo[[3]]</span></a>
-<a class="sourceLine" id="cb6-62" data-line-number="62"><span class="co">#&gt; $stuff$buried$deeper$foo[[3]]$location</span></a>
-<a class="sourceLine" id="cb6-63" data-line-number="63"><span class="co">#&gt; [1] "here"</span></a>
-<a class="sourceLine" id="cb6-64" data-line-number="64"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-65" data-line-number="65"><span class="co">#&gt; $stuff$buried$deeper$foo[[3]]$name</span></a>
-<a class="sourceLine" id="cb6-66" data-line-number="66"><span class="co">#&gt; [1] "Isabella Velasquez"</span></a>
+<a class="sourceLine" id="cb6-60" data-line-number="60"><span class="co">#&gt; $stuff$buried$stilldeep$even_deeper[[2]]$more_nested_stuff</span></a>
+<a class="sourceLine" id="cb6-61" data-line-number="61"><span class="co">#&gt; [1] 5</span></a>
+<a class="sourceLine" id="cb6-62" data-line-number="62"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb6-63" data-line-number="63"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb6-64" data-line-number="64"><span class="co">#&gt; $stuff$buried$stilldeep$even_deeper[[3]]</span></a>
+<a class="sourceLine" id="cb6-65" data-line-number="65"><span class="co">#&gt; $stuff$buried$stilldeep$even_deeper[[3]]$location</span></a>
+<a class="sourceLine" id="cb6-66" data-line-number="66"><span class="co">#&gt; [1] "here"</span></a>
 <a class="sourceLine" id="cb6-67" data-line-number="67"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-68" data-line-number="68"><span class="co">#&gt; $stuff$buried$deeper$foo[[3]]$super_power</span></a>
-<a class="sourceLine" id="cb6-69" data-line-number="69"><span class="co">#&gt; [1] "teleportation"</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-68" data-line-number="68"><span class="co">#&gt; $stuff$buried$stilldeep$even_deeper[[3]]$name</span></a>
+<a class="sourceLine" id="cb6-69" data-line-number="69"><span class="co">#&gt; [1] "Isabella Velasquez"</span></a>
+<a class="sourceLine" id="cb6-70" data-line-number="70"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb6-71" data-line-number="71"><span class="co">#&gt; $stuff$buried$stilldeep$even_deeper[[3]]$super_power</span></a>
+<a class="sourceLine" id="cb6-72" data-line-number="72"><span class="co">#&gt; [1] "teleportation"</span></a></code></pre></div>
 <p>And just the <em>first</em> element of the <code>twitter</code> dataset 😱</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">twitter_data[[<span class="dv">1</span>]]</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; $created_at</span></a>
@@ -513,14 +527,15 @@
 <p align="center">
 <img src="https://media.giphy.com/media/mwMowfcaEcvpm/giphy.gif" alt="roomba_gif"></p>
 </div>
-</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Report a bug at <br><a href="NA">NA</a>
+<li>Browse source code at <br><a href="https://github.com/ropenscilabs/roomba">https://​github.com/​ropenscilabs/​roomba</a>
+</li>
+<li>Report a bug at <br><a href="https://github.com/ropenscilabs/roomba/issues">https://​github.com/​ropenscilabs/​roomba/​issues</a>
 </li>
 </ul>
 </div>

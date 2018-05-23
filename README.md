@@ -4,7 +4,7 @@ roomba
 
 [![Travis build status](https://travis-ci.com/ropenscilabs/roomba.svg?branch=master)](https://travis-ci.com/ropenscilabs/roomba)
 
-This is a package to transform large, multi-nested lists into a moreuser-friendly format (i.e. a `tibble`) in `R`. The initial focus is on making processing of return values from `jsonlite::fromJSON()` queries more seamless, but ideally this package should be useful for deeply-nested lists from an array of sources.
+This is a package to transform large, multi-nested lists into a more user-friendly format (i.e. a `tibble`) in `R`. The initial focus is on making processing of return values from `jsonlite::fromJSON()` queries more seamless, but ideally this package should be useful for deeply-nested lists from an array of sources.
 
 <!-- ![roomba_gif](https://media.giphy.com/media/mwMowfcaEcvpm/giphy.gif) -->
 <p align="center">
@@ -30,6 +30,9 @@ You can install the development version from [GitHub](https://github.com/) with:
 devtools::install_github("ropenscilabs/roomba")
 ```
 
+<p align="center">
+<img src="./img/sticker.png" alt="roomba_gif" height="200px">
+</p>
 Say we have some JSON from a pesky API.
 
 ``` r
@@ -90,15 +93,15 @@ which we can pull data into the columns we want with `roomba`.
 
 ``` r
 super_data %>%
-  roomba(cols = c("name", "super_power", "location", "more_nested_stuff"), keep = any)
-#> # A tibble: 5 x 4
-#>   location name               super_power            more_nested_stuff
-#>   <chr>    <chr>              <chr>                              <int>
-#> 1 here     Laura DeCicco      fixing merge conflicts                NA
-#> 2 here     Amanda Dobbyn      flight                                 4
-#> 3 not here Jim Hester         <NA>                                  NA
-#> 4 here     Christine Stawitz  invisibility                           5
-#> 5 here     Isabella Velasquez teleportation                         NA
+  roomba(cols = c("name", "super_power", "more_nested_stuff"), keep = any)
+#> # A tibble: 5 x 3
+#>   name               super_power            more_nested_stuff
+#>   <chr>              <chr>                              <int>
+#> 1 Laura DeCicco      fixing merge conflicts                NA
+#> 2 Amanda Dobbyn      flight                                 4
+#> 3 Jim Hester         <NA>                                  NA
+#> 4 Christine Stawitz  invisibility                           5
+#> 5 Isabella Velasquez teleportation                         NA
 ```
 
 <br>
