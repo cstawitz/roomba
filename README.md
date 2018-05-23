@@ -132,6 +132,12 @@ Shiny app included!
 <p align="center">
 <img src="images/shinydemo.gif" alt="roomba_gif">
 </p>
+Run the app like this:
+
+``` r
+shiny_roomba()
+```
+
 <br>
 
 What did that original data look like???

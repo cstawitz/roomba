@@ -128,6 +128,12 @@ roomba(twitter_data, c("created_at", "name"))
   <img src="images/shinydemo.gif" alt="roomba_gif">
 </p>
 
+Run the app like this:
+```{r eval=FALSE}
+shiny_roomba()
+
+```
+
 <br>
 
 # What did that original data look like???
