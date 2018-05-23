@@ -5,3 +5,8 @@
 ^README\.Rmd$
 ^LICENSE\.md$
 ^\images$
+^\docs$
+docs
+img
+images
+

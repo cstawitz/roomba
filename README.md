@@ -114,7 +114,7 @@ roomba(twitter_data, c("created_at", "name"))
 #>    name                 created_at                    
 #>    <chr>                <chr>                         
 #>  1 Code for America     Mon Aug 10 18:59:29 +0000 2009
-#>  2 Ben Lorica 罗瑞卡    Mon Dec 22 22:06:18 +0000 2008
+#>  2 Ben Lorica <U+7F57><U+745E><U+5361>    Mon Dec 22 22:06:18 +0000 2008
 #>  3 Dan Sholler          Thu Apr 03 20:09:24 +0000 2014
 #>  4 Code for America     Mon Aug 10 18:59:29 +0000 2009
 #>  5 FiveThirtyEight      Tue Jan 21 21:39:32 +0000 2014
@@ -132,6 +132,12 @@ Shiny app included!
 <p align="center">
 <img src="images/shinydemo.gif" alt="roomba_gif">
 </p>
+Run the app like this:
+
+``` r
+shiny_roomba()
+```
+
 <br>
 
 What did that original data look like???
