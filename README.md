@@ -1,6 +1,6 @@
 
-roomba
-======
+roomba <img src="./img/sticker.png" alt="roomba_gif" height="150px" align="right" />
+====================================================================================
 
 [![Travis build status](https://travis-ci.com/ropenscilabs/roomba.svg?branch=master)](https://travis-ci.com/ropenscilabs/roomba)
 
@@ -30,9 +30,9 @@ You can install the development version from [GitHub](https://github.com/) with:
 devtools::install_github("ropenscilabs/roomba")
 ```
 
-<p align="center">
-<img src="./img/sticker.png" alt="roomba_gif" height="200px">
-</p>
+Usage
+-----
+
 Say we have some JSON from a pesky API.
 
 ``` r
@@ -114,7 +114,7 @@ roomba(twitter_data, c("created_at", "name"))
 #>    name                 created_at                    
 #>    <chr>                <chr>                         
 #>  1 Code for America     Mon Aug 10 18:59:29 +0000 2009
-#>  2 Ben Lorica <U+7F57><U+745E><U+5361>    Mon Dec 22 22:06:18 +0000 2008
+#>  2 Ben Lorica 罗瑞卡    Mon Dec 22 22:06:18 +0000 2008
 #>  3 Dan Sholler          Thu Apr 03 20:09:24 +0000 2014
 #>  4 Code for America     Mon Aug 10 18:59:29 +0000 2009
 #>  5 FiveThirtyEight      Tue Jan 21 21:39:32 +0000 2014
