@@ -1,5 +1,4 @@
-﻿> Written with [StackEdit](https://stackedit.io/).
-> ```
+
 ---
 slug: "roomba"
 title: A package for tidying nested lists
