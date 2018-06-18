@@ -435,13 +435,17 @@ In addition, we've got some features we want to add, such as handling a larger v
 
 ## The team 
 **Laura DeCicco**
+
 **Amanda Dobbyn**
 Job: Data Scientist at Earlybird Software
-Project contributions: initial GH issue, package name, wapper for `dfs_idx()`
+Project contributions: initial GH issue, package name, wrapper for `dfs_idx()`
+
 **Jim Hester**
+
 **Christine Stawitz**
 Job: Postdoctoral researcher at UW's School of Aquatic and Fishery Sciences
-Project contributions: Shiny app,  
+Project contributions: Shiny app, README and blog post writing
+
 **Isabella Velasquez**
 
 
