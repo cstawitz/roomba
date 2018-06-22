@@ -450,7 +450,8 @@ Job: Data Scientist at U.S. Geological Survey
 Project contributions: Fixing merge conflicts :)
 
 **Isabella Velasquez**
-
+Job: Data Analyst at the Bill & Melinda Gates Foundations
+Project contributions: hex sticker!
 
 <!--stackedit_data:
 eyJoaXN0b3J5IjpbLTk1NzM5MzYxOCwtMTMyNDAxNTUxNiwzOT
