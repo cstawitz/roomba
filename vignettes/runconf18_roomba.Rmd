@@ -91,7 +91,7 @@ Job: Data Scientist at Earlybird Software <br>
 Project contributions: initial GH issue, package name, wrapper for `dfs_idx()` <br>
 
 **Jim Hester** <br>
-Job: Developer at RStudio
+Job: Software Engineer at RStudio <br>
 Project contributions: `dfs_idx()` and `remove_nulls()` functions, package building, README, and debugging <br>
 
 **Christine Stawitz** <br>
