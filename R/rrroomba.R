@@ -28,7 +28,7 @@ roomba <- function(inp, cols = NULL, default = NA,
   # -- Message that NULLs were replaced with NAs?
 
   has_good_stuff <- function(data, cols) {
-    keep(purrr::map_lgl(cols, ~ length(data[[.x]]) > 0))
+    purrr::keep(purrr::map_lgl(cols, ~ length(data[[.x]]) > 0))
   }
 
   indices <-
