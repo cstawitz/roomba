@@ -1,5 +1,5 @@
 
-roomba <img src="/img/sticker.png" alt="roomba_gif" height="150px" align="right" />
+roomba <img src="img/sticker.png" alt="roomba_gif" height="150px" align="right" />
 ====================================================================================
 
 [![Travis build status](https://travis-ci.com/ropenscilabs/roomba.svg?branch=master)](https://travis-ci.com/ropenscilabs/roomba)
