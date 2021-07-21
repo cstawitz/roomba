@@ -6,6 +6,7 @@
 #' @param default Replacement for NULL values. Defaults to NA.
 #' @param keep Should all or any data be kept?
 #'
+#' @importFrom magrittr %>%
 #' @export
 #'
 #' @examples
