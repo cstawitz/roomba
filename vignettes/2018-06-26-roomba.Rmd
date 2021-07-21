@@ -16,6 +16,7 @@ authors:
 date: 2018-06-26
 categories: blog
 topicid: 925
+output: md_document
 tags:
 - r
 - community
@@ -95,7 +96,7 @@ Job: Software Engineer at RStudio <br>
 Project contributions: `dfs_idx()` and `remove_nulls()` functions, package building, README, and debugging <br>
 
 **Christine Stawitz** <br>
-Job: Postdoctoral researcher at UW's School of Aquatic and Fishery Sciences <br>
+Job: Fishery Biologist at NOAA Fisheries <br>
 Project contributions: Shiny app, README and blog post writing <br>
 
 **Laura DeCicco** <br>

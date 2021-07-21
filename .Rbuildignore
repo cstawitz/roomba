@@ -10,3 +10,6 @@ docs
 img
 images
 
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
