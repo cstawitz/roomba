@@ -6,7 +6,7 @@ library(dplyr)
 test_that("Test that replace_null() works as expected", {
   # Test that replace_null() works as expected
   lst <- list(c("a", "b"), x = NULL)
-  cleaned_lst <- roomba:::replace_null(lst, replacement = "foo")
+  cleaned_lst <- replace_null(lst, replacement = "foo")
   expect_equal(cleaned_lst,
                list(c("a", "b"), x = "foo"))
 })
@@ -49,17 +49,17 @@ test_that("Test that replace_null() works with numbers", {
 }', simplifyVector = FALSE)
 
 
-  cleaned_lst <- roomba:::replace_null(toy_data)
+  cleaned_lst <- replace_null(toy_data)
 
   secret_power <- cleaned_lst %>% dfs_idx(~ .x$goodstuff == "here") %>%
-    purrr:::map_dfr(~ cleaned_lst[[.x]]) %>%
-    dplyr::pull(secret_power)
+    map_dfr(~ cleaned_lst[[.x]]) %>%
+    pull(secret_power)
 
   expect_type(secret_power, "integer")
 
   toy_names <- cleaned_lst %>% dfs_idx(~ .x$goodstuff == "here") %>%
-    purrr:::map_dfr(~ cleaned_lst[[.x]]) %>%
-    dplyr::pull(name)
+    map_dfr(~ cleaned_lst[[.x]]) %>%
+    pull(name)
 
   expect_type(toy_names, "character")
 
